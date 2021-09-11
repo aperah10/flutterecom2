@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 
 class FieldF extends StatefulWidget {
   bool obscureTxt;
-  final TextInputType inputType;
-  final String? hintText;
+  final TextInputType? inputType;
+  final String? placeholder;
+  String? labelText;
   final TextEditingController? controller;
   String? Function(String?)? formValidator;
-
+  bool brd;
   FieldF(
       {Key? key,
-      required this.inputType,
-      required this.hintText,
+      this.inputType,
+      this.placeholder,
       this.controller,
       this.formValidator,
+      this.labelText,
+      this.brd = true,
       this.obscureTxt = false})
       : super(key: key);
 
@@ -37,12 +40,13 @@ class _FieldFState extends State<FieldF> {
           validator: widget.formValidator,
           autofocus: false,
           decoration: InputDecoration(
-              hintText: widget.hintText,
+              labelText: widget.labelText,
+              hintText: widget.placeholder,
               // labelText: "Name",     // Set text upper animation
-              border: OutlineInputBorder(),
+              border: widget.brd ? OutlineInputBorder() : null,
               suffixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: widget.hintText == 'Password' &&
+                child: widget.placeholder == 'Password' &&
                         widget.inputType == TextInputType.visiblePassword
                     ? IconButton(
                         splashColor: Colors.transparent,

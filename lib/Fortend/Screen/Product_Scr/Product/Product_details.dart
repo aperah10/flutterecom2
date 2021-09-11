@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Product/ProdwithCart/prodwithcart_bloc.dart';
 import 'package:secd_ecom/Fortend/CusField/Buttons_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Drop_Down_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Image_C.dart';
@@ -6,30 +8,42 @@ import 'package:secd_ecom/Fortend/CusField/Text_C.dart';
 import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 
 class ProductDetailScr extends StatelessWidget {
+  dynamic prodNumber;
   static final String routeName = "/product-details";
-  ProductDetailScr({Key? key}) : super(key: key);
+  ProductDetailScr({Key? key, this.prodNumber}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        titleName: 'Account Page',
-      ),
-      body: SafeArea(
-          bottom: false,
-          left: true,
-          right: true,
-          top: false,
-          child: ProductDetailOne()),
+    return BlocListener<ProdwithcartBloc, ProdwithcartState>(
+      listener: (context, state) {},
+      child: BlocBuilder<ProdwithcartBloc, ProdwithcartState>(
+          builder: (context, state) {
+        // if (state is ItemAddingCartState) {
+        //   cartItems = state.cartItems;
+        // }
+        return Scaffold(
+          appBar: CustomAppBar(
+            titleName: 'Account Page',
+          ),
+          body: SafeArea(
+              bottom: false,
+              left: true,
+              right: true,
+              top: false,
+              child: ProductDetailOne(prodNumber: prodNumber)),
+        );
+      }),
     );
   }
 }
 
 class ProductDetailOne extends StatelessWidget {
-  const ProductDetailOne({Key? key}) : super(key: key);
+  dynamic prodNumber;
+  ProductDetailOne({Key? key, this.prodNumber}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print(' this is ProductAdded :- $prodNumber');
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,42 +53,42 @@ class ProductDetailOne extends StatelessWidget {
           SinglePic(),
 
           // ! 2.  TITLE
-          TxtTitle(titleName: 'Title'),
+          TxtTitle('Title'),
           TxtContent(
-            contName: '500',
+            prodNumber.discountPrice.toString(),
           ),
           // ! 2.1 DROPDOWN_MENU_ITEM
-          TxtTitle(titleName: 'Varitaion'),
+          TxtTitle('Varitaion'),
           DropDownBtn(),
 
           // ! 3.  DESCRIPTION
-          TxtTitle(titleName: "Description"),
+          TxtTitle("Description"),
           TxtContent(
-            contName:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim erat in accumsan tempus. Mauris congue luctus neque, in semper purus maximus iaculis. Donec et eleifend quam, a sollicitudin magna.",
+            prodNumber.description,
           ),
-          TxtTitle(titleName: "Description"),
+          TxtTitle("Description"),
           TxtContent(
-            contName:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim erat in accumsan tempus. Mauris congue luctus neque, in semper purus maximus iaculis. Donec et eleifend quam, a sollicitudin magna.",
+            prodNumber.description,
           ),
-          TxtTitle(titleName: "Description"),
+          TxtTitle("Description"),
           TxtContent(
-            contName:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim erat in accumsan tempus. Mauris congue luctus neque, in semper purus maximus iaculis. Donec et eleifend quam, a sollicitudin magna.",
+            prodNumber.description,
           ),
-          TxtTitle(titleName: "Description"),
+          TxtTitle("Description"),
           TxtContent(
-            contName:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim erat in accumsan tempus. Mauris congue luctus neque, in semper purus maximus iaculis. Donec et eleifend quam, a sollicitudin magna.",
+            prodNumber.description,
           ),
           // ! 4. RATINGS , Reviews , Comments .......
           InformationBtn(),
           // ! 5. BUTTONS FOR CART AND BUYNOW
           Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
             MultipleBtn(
-              btnName: 'Add to Cart',
-            ),
+                btnName: 'Add to Cart',
+                submitMethod: () {
+                  // !   PRODUCT page send data in cart
+                  BlocProvider.of<ProdwithcartBloc>(context)
+                    ..add(ProdAddedCartEvent(product_id: prodNumber.id));
+                }),
             MultipleBtn(
               btnName: 'BuyNow',
             ),

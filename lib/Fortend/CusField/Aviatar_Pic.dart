@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:secd_ecom/Fortend/ResponsiveFile/SizeConf.dart';
 
+import 'Iocns_C.dart';
+
 /* -------------------------------------------------------------------------- */
 /*                           // !AVIATOR PIC FOR :-                           */
 /* -------------------------------------------------------------------------- */
@@ -47,7 +49,8 @@ class CusAvaitar extends StatelessWidget {
 
 // ! SECOND AVATOR PIC AND WIDTH
 class CusAvaitar2 extends StatelessWidget {
-  const CusAvaitar2({Key? key}) : super(key: key);
+  dynamic submitMethod;
+  CusAvaitar2({Key? key, this.submitMethod}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +91,9 @@ class CusAvaitar2 extends StatelessWidget {
                   ),
                   color: Colors.green,
                 ),
-                child: Icon(
+                child: IconBtn(
                   Icons.edit,
-                  color: Colors.white,
+                  submitMethod: submitMethod,
                 ),
               )),
         ],

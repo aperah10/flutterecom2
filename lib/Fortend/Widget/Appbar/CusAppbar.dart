@@ -5,14 +5,14 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
     Key? key,
     required this.titleName,
     this.createPage,
-    this.act = false,
+    this.act,
   })  : preferredSize = Size.fromHeight(kToolbarHeight),
         super(key: key);
 
   final String titleName;
   // final Widget Function() createPage;
   dynamic createPage;
-  bool act = false;
+  List<Widget>? act = [];
 
   @override
   final Size preferredSize;
@@ -41,19 +41,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
         // orc END  LEADING  FOR APPBAR
 
         // ! 3. ACTIONS  LIST WIDGET APPBAR LIST OF ITEM
-        actions: widget.act == true
-            ? <Widget>[
-                GestureDetector(
-                  onTap: () {},
-                  child: Padding(
-                      padding: EdgeInsets.only(right: 10.0),
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.black,
-                      )),
-                )
-              ]
-            : null);
+        actions: widget.act);
   }
 }
 

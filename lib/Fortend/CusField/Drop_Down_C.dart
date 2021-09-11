@@ -61,7 +61,7 @@ class _DropDownOneState extends State<DropDownOne> {
             child: Text(value),
           );
         }).toList(),
-        hint: SubTxtTitle(titleName: widget.dName),
+        hint: SubTxtTitle(widget.dName),
       ),
     );
   }

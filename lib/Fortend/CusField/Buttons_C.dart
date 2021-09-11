@@ -69,25 +69,36 @@ class MultipleBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Expanded(
-        child: MaterialButton(
-          color: btnName == 'Buy' ? Colors.deepOrange : Colors.black54,
-          elevation: 0,
-          onPressed: () {},
+        child: Expanded(
+      child: MaterialButton(
+        elevation: 0,
+        color: btnName == 'Buy' ? Colors.deepOrange : Colors.black54,
+        // minWidth: double.infinity,
+        height: 40,
+        onPressed: submitMethod,
+        child: Ink(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [new Color(0xff374ABE), new Color(0xff64B6FF)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight),
+              borderRadius: BorderRadius.all(Radius.circular(5.0))),
           child: Container(
-            padding: EdgeInsets.all(15.0),
+            constraints: BoxConstraints(
+                minWidth: 40,
+                maxWidth: 100.0,
+                minHeight: 40.0,
+                maxHeight: 55.0), // min sizes for Material buttons
+            alignment: Alignment.center,
             child: Text(
               btnName,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500),
+              style: TextStyle(color: Colors.white),
             ),
           ),
         ),
       ),
-    );
+    ));
   }
 }
 

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:secd_ecom/Fortend/CusField/Aviatar_Pic.dart';
+import 'package:secd_ecom/Fortend/Screen/Product_Scr/Cart/Cart.dart';
+import 'package:secd_ecom/Fortend/Screen/Product_Scr/Product/Product_Cat.dart';
+import 'package:secd_ecom/Fortend/Screen/Product_Scr/Search/SearchProduct.dart';
+import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Acc_P.dart';
+import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/ShowP.dart';
 
 class MyDrawerList extends StatefulWidget {
   const MyDrawerList({Key? key}) : super(key: key);
@@ -17,14 +22,30 @@ class _MyDrawerListState extends State<MyDrawerList> {
           child: ListView(padding: EdgeInsets.zero, children: <Widget>[
         //  orc Custom Header file
         // CusDrawerHeader(),
-        CusAvaitar(),
+        CusAvaitar2(),
         //  ! END  Custom Header file
 
         // ! CUSTOM DRAWER LIST ITEM
-        // CusDrawerList(
-        //     title: 'Accont Show',
-        //     icon: Icons.account_circle,
-        //     createPage: () => AccountShowScreen()),
+        CusDrawerList(
+            title: 'Product Grid Show',
+            icon: Icons.price_check,
+            createPage: () => ProductGridScr()),
+        CusDrawerList(
+            title: ' Cart',
+            icon: Icons.shopping_bag,
+            createPage: () => CartScr()),
+        CusDrawerList(
+            title: ' Search',
+            icon: Icons.search,
+            createPage: () => SerachScr()),
+        CusDrawerList(
+            title: ' Acccount',
+            icon: Icons.account_balance,
+            createPage: () => AccountScr()),
+        CusDrawerList(
+            title: ' Edit Profile',
+            icon: Icons.add_a_photo_rounded,
+            createPage: () => ProfileShowScr()),
       ])),
     );
   }

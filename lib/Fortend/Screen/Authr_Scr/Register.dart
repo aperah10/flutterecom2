@@ -127,25 +127,25 @@ class _SignUpFormState extends State<SignUpForm> {
 
           // NameEdit text
           FieldF(
-              hintText: 'Name',
+              placeholder: 'Name',
               inputType: TextInputType.name,
               controller: fullnameController,
               formValidator: (v) => formvalid.fullnameValidator(v)),
           FieldF(
-            hintText: 'Mobile',
+            placeholder: 'Mobile',
             inputType: TextInputType.phone,
             controller: phoneController,
             formValidator: (v) => formvalid.mobileValidator(v),
           ),
           FieldF(
-            hintText: 'Email',
+            placeholder: 'Email',
             inputType: TextInputType.emailAddress,
             controller: emailController,
             formValidator: (v) => formvalid.emailValidator(v),
           ),
           FieldF(
               obscureTxt: true,
-              hintText: 'Password',
+              placeholder: 'Password',
               controller: passwordController,
               formValidator: (v) => formvalid.passwordValidator(v),
               inputType: TextInputType.visiblePassword),

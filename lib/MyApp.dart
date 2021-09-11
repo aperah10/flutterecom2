@@ -10,6 +10,8 @@ import 'Fortend/Screen/Authr_Scr/HomeScr.dart';
 import 'Fortend/Screen/Authr_Scr/Login.dart';
 import 'Fortend/Screen/Authr_Scr/Register.dart';
 import 'Fortend/Screen/Product_Scr/Product/Product_details.dart';
+import 'Fortend/Screen/Prof_Address_Scr/Profile/Edit_P.dart';
+import 'Fortend/Screen/Prof_Address_Scr/Profile/ShowP.dart';
 import 'ZExtra/AllproviderList.dart';
 
 class MyApp extends StatelessWidget {
@@ -54,13 +56,16 @@ class MyApp extends StatelessWidget {
             }
             print('storage token:-  $storage');
             // return CartScrOne();
-            return ProductDetailScr();
+            // return ProductDetailScr();
+            return HomeScr();
           },
         ),
         routes: {
           HomeScr.routeName: (ctx) => HomeScr(),
           LoginScr.routeName: (ctx) => LoginScr(),
           RegisterScr.routeName: (ctx) => RegisterScr(),
+          ProfileShowScr.routeName: (ctx) => ProfileShowScr(),
+          ProfileEditScr.routeName: (ctx) => ProfileEditScr(),
           // ProductGridView.routeName: (ctx) => ProductGridView(),
           // ProductListView.routeName: (ctx) => ProductListView(),
           // CartScreen.routeName: (ctx) => CartScreen(),

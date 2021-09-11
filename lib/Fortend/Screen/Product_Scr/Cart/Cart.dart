@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/RCLS/Cart/cartp_bloc.dart';
 import 'package:secd_ecom/Fortend/CusField/Buttons_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Image_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Iocns_C.dart';
@@ -6,55 +8,62 @@ import 'package:secd_ecom/Fortend/CusField/Text_C.dart';
 import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 import 'package:secd_ecom/Fortend/Widget/Border/round_border.dart';
 
-// class CartScr extends StatelessWidget {
-//   static const routeName = '/cart-screens';
-//   CartScr({Key? key}) : super(key: key);
+class CartScr extends StatefulWidget {
+  static const routeName = '/cart-screens';
+  CartScr({Key? key}) : super(key: key);
 
-//   // CartpBloc cartBloc = CartpBloc(cartRespo: CartDataRespo(), storage: storage);
+  @override
+  _CartScrState createState() => _CartScrState();
+}
 
-//   // // ! LOAD INIT STATE IS CART PAGE
-//   // @override
-//   // void initState() {
-//   //   cartBloc = BlocProvider.of<CartpBloc>(context);
-//   //   cartBloc.add(FetchCartEvent());
-//   //   super.initState();
-//   // }
+class _CartScrState extends State<CartScr> {
+  // CartpBloc cartBloc = CartpBloc(cartRespo: CartDataRespo(), storage: storage);
+  CartpBloc cartBloc = CartpBloc();
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocConsumer<CartpBloc, CartpState>(
-//         listener: (context, state) {},
-//         builder: (context, state) {
-//           print("produc page state: $state");
-//           if (state is CartLoadingState) {
-//             return Center(child: CircularProgressIndicator());
-//           }
-//           if (state is CartErrorState) {
-//             return Center(child: Text(' this is eror ${state.message}'));
-//           }
-//           if (state is CartLoadedState) {
-//             return CartScrOne(cartData: state.cartData);
-//           }
-//           return Scaffold(
-//             body: Center(child: CircularProgressIndicator()),
-//           );
-//         });
-//   }
-// }
+  // ! LOAD INIT STATE IS CART PAGE
+  @override
+  void initState() {
+    cartBloc = BlocProvider.of<CartpBloc>(context);
+    cartBloc.add(FetchCartEvent());
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<CartpBloc, CartpState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          print("produc page state: $state");
+          if (state is CartLoadingState) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (state is CartErrorState) {
+            return Center(child: Text(' this is eror ${state.message}'));
+          }
+          if (state is CartLoadedState) {
+            return CartScrOne(cartData: state.cartData);
+          }
+          return Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        });
+  }
+}
 
 /* -------------------------------------------------------------------------- */
 /*                              // ! CART SCREEN                              */
 /* -------------------------------------------------------------------------- */
 
 class CartScrOne extends StatelessWidget {
-  // dynamic cartData;
+  dynamic cartData;
   CartScrOne({
     Key? key,
+    this.cartData,
   }) : super(key: key);
 
   @override
-  final cartData = List.generate(
-      20, (index) => {"index": 1, "title": "mango", "price": 500});
+  // final cartData = List.generate(
+  //     20, (index) => {"index": 1, "title": "mango", "price": 500});
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +107,7 @@ class CartCheckBtn extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     TxtTitle(
-                      titleName: "Checkout Price:",
+                      "Checkout Price:",
                     ),
                     Spacer(),
                     Text(
@@ -113,7 +122,7 @@ class CartCheckBtn extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     TxtTitle(
-                      titleName: "Checkout Price:",
+                      "Checkout Price:",
                     ),
                     Spacer(),
                     Text(
@@ -158,21 +167,21 @@ class CartListScr extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Flexible(
-                        child: TxtTitle(titleName: 'Item'),
+                        child: TxtTitle(cartNumber.product.title),
                       ),
                       // ! 2.1.1
-                      IconBtn(iconD: Icons.delete),
+                      IconBtn(Icons.delete),
                     ],
                   ),
                   // ! 2.2 data
                   Row(
                     children: [
-                      TxtTitle(titleName: "Price: "),
+                      TxtTitle("Price: "),
                       SizedBox(
                         width: 5,
                       ),
                       SubTxtTitle(
-                        titleName: 'Rs 200',
+                        cartNumber.product.discountPrice.toString(),
                       )
                       // Text(
                       //   '\$200',
@@ -185,12 +194,12 @@ class CartListScr extends StatelessWidget {
 
                   Row(
                     children: <Widget>[
-                      TxtTitle(titleName: "Sub Total: "),
+                      TxtTitle("Sub Total: "),
                       SizedBox(
                         width: 5,
                       ),
                       SubTxtTitle(
-                        titleName: '\$400',
+                        'Rs ${cartNumber.quantity * cartNumber.product.discountPrice}',
                       )
                     ],
                   ),
@@ -208,7 +217,7 @@ class CartListScr extends StatelessWidget {
                       Card(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('2'),
+                          child: Text(cartNumber.quantity.toString()),
                         ),
                       ),
                       // ! END ITEM DATA

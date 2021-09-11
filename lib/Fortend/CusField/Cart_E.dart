@@ -9,13 +9,13 @@ class CartOne extends StatelessWidget {
     return Row(
       children: <Widget>[
         TxtTitle(
-          titleName: "Sub Total: ",
+          "Sub Total: ",
         ),
         SizedBox(
           width: 5,
         ),
         SubTxtTitle(
-          titleName: '\$700',
+          '\$700',
         )
         // Text('\$400',
         //     style: TextStyle(

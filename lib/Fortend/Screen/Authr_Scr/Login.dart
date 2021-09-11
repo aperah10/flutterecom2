@@ -123,14 +123,14 @@ class _LoginFormState extends State<LoginForm> {
           /*                                 FORM FIELD                                 */
           /* -------------------------------------------------------------------------- */
           FieldF(
-            hintText: 'phone',
+            placeholder: 'phone',
             controller: usernameController,
             inputType: TextInputType.emailAddress,
             formValidator: (String? val) => formvalid.mobileValidator(val),
           ),
           FieldF(
               obscureTxt: true,
-              hintText: 'Password',
+              placeholder: 'Password',
               controller: passwordController,
               inputType: TextInputType.visiblePassword,
               formValidator: (String? val) => formvalid.passwordValidator(val)),

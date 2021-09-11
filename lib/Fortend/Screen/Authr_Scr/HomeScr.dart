@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:secd_ecom/Fortend/Widget/Drawer/Dras.dart';
 
 import 'Login.dart';
 
@@ -22,7 +23,7 @@ class HomeScr extends StatelessWidget {
 
     return Scaffold(
       // ! DRAWER FOR HOME PAGE
-      // drawer: MyDrawerList(),
+      drawer: MyDrawerList(),
       // ? END DRAWER
       appBar: AppBar(
         title: Text('Home'),
