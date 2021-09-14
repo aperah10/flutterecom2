@@ -29,10 +29,20 @@ class ProdwithcartBloc extends Bloc<ProdwithcartEvent, ProdwithcartState> {
       try {
         List<ProductC> productData = await prodRespo.getProduct();
         List<NewCart> cartData = await cartRespo.getCartData();
-        bool cartPos;
+
         // print('-----------------------------------------------------------');
         // print(productData.any((e) => e.title!.contains('p1')));
         // print(cartData.any((e) => e.product!.id!.contains('p1')));
+        // print(productData.every((e) => e.title!.contains('Mobile')));
+        //  ! UNIQU VALUE IN LIST
+        var dup = [];
+        for (var p in productData) {
+          dup.add(p.category!);
+        }
+
+        // print(dup);
+        dup = dup.toSet().toList();
+        // print(dup);
 
         yield ProductCartLoadedState(
             productData: productData, cartData: cartData);

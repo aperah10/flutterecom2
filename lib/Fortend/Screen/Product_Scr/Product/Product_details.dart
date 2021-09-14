@@ -51,7 +51,7 @@ class ProductDetailOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(' this is ProductAdded :- $prodNumber');
+    // print(' this is ProductAdded :- $prodNumber');
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

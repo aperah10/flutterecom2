@@ -36,6 +36,7 @@ dependencies:
   flutter_secure_storage: ^4.2.0
   localstorage: ^4.0.0+1
   responsive_framework: ^0.1.4
+  font_awesome_flutter: ^9.1.0
 
 dev_dependencies:
   flutter_test:

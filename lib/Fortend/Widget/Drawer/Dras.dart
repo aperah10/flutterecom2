@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:secd_ecom/Fortend/CusField/Aviatar_Pic.dart';
+import 'package:secd_ecom/Fortend/Screen/Order/Order2.dart';
+import 'package:secd_ecom/Fortend/Screen/Order/Order_Scr.dart';
+import 'package:secd_ecom/Fortend/Screen/Order/Payment.dart';
+import 'package:secd_ecom/Fortend/Screen/Order/payment2.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Cart/Cart.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Product/Product_Cat.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Search/SearchProduct.dart';
@@ -48,6 +52,22 @@ class _MyDrawerListState extends State<MyDrawerList> {
             title: ' Edit Profile',
             icon: Icons.add_a_photo_rounded,
             createPage: () => ProfileShowScr()),
+        CusDrawerList(
+            title: ' Order Page',
+            icon: Icons.add_a_photo_rounded,
+            createPage: () => ConfirmOrderPage()),
+        CusDrawerList(
+            title: ' Order 2',
+            icon: Icons.one_k_rounded,
+            createPage: () => MyOrdersScreen()),
+        CusDrawerList(
+            title: ' Payment page',
+            icon: Icons.payment,
+            createPage: () => PaymentPage()),
+        CusDrawerList(
+            title: ' Payment page 2',
+            icon: Icons.payment,
+            createPage: () => PaymentScreen()),
       ])),
     );
   }
