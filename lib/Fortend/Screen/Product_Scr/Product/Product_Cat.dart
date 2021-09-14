@@ -144,8 +144,8 @@ class ProdGridList extends StatelessWidget {
 /* -------------------------------------------------------------------------- */
 class ProdGridListShow extends StatelessWidget {
   dynamic prodNumber;
-  List cartNumber;
-  ProdGridListShow({Key? key, this.prodNumber, required this.cartNumber})
+  List? cartNumber;
+  ProdGridListShow({Key? key, this.prodNumber, this.cartNumber})
       : super(key: key);
 
   // cartFun() {
@@ -173,7 +173,9 @@ class ProdGridListShow extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) =>
                             // ! add PRODUCT ITEM DEIALS
-                            ProductDetailScr(prodNumber: prodNumber)));
+                            ProductDetailScr(
+                                prodNumber: prodNumber,
+                                cartNumber: cartNumber)));
               },
               title: Text(
                 prodNumber.title,
@@ -190,19 +192,21 @@ class ProdGridListShow extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 MultipleBtn(
-                  btnName: cartNumber.any((e) => e.product!.id!
+                  btnName: cartNumber!.any((e) => e.product!.id!
                               .contains(prodNumber.id.toString())) ==
                           false
                       ? 'acart'
                       : 'gcart',
                   submitMethod: () {
-                    if (cartNumber.any((e) => e.product!.id!
+                    // ! PRODUCT DOES'NT EXIST IN CART
+                    if (cartNumber!.any((e) => e.product!.id!
                             .contains(prodNumber.id.toString())) ==
                         false) {
                       BlocProvider.of<ProdwithcartBloc>(context)
                         ..add(ProdAddedCartEvent(
                             product_id: prodNumber.id, quantity: 100));
-                    } else {
+                    } // ! PRODUCT  EXIST IN CART
+                    else {
                       Navigator.of(context)
                           .pushReplacementNamed(CartScr.routeName);
                     }

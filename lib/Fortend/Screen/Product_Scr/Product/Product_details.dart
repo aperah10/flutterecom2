@@ -5,12 +5,15 @@ import 'package:secd_ecom/Fortend/CusField/Buttons_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Drop_Down_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Image_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Text_C.dart';
+import 'package:secd_ecom/Fortend/Screen/Product_Scr/Cart/Cart.dart';
 import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 
 class ProductDetailScr extends StatelessWidget {
   dynamic prodNumber;
+  List? cartNumber;
   static final String routeName = "/product-details";
-  ProductDetailScr({Key? key, this.prodNumber}) : super(key: key);
+  ProductDetailScr({Key? key, this.prodNumber, this.cartNumber})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +21,9 @@ class ProductDetailScr extends StatelessWidget {
       listener: (context, state) {},
       child: BlocBuilder<ProdwithcartBloc, ProdwithcartState>(
           builder: (context, state) {
-        // if (state is ItemAddingCartState) {
-        //   cartItems = state.cartItems;
-        // }
+        if (state is ProdAddingCartState) {
+          // cartItems = state.cartItems;
+        }
         return Scaffold(
           appBar: CustomAppBar(
             titleName: 'Account Page',
@@ -30,7 +33,10 @@ class ProductDetailScr extends StatelessWidget {
               left: true,
               right: true,
               top: false,
-              child: ProductDetailOne(prodNumber: prodNumber)),
+              child: ProductDetailOne(
+                prodNumber: prodNumber,
+                cartNumber: cartNumber,
+              )),
         );
       }),
     );
@@ -39,7 +45,9 @@ class ProductDetailScr extends StatelessWidget {
 
 class ProductDetailOne extends StatelessWidget {
   dynamic prodNumber;
-  ProductDetailOne({Key? key, this.prodNumber}) : super(key: key);
+  List? cartNumber;
+  ProductDetailOne({Key? key, this.prodNumber, this.cartNumber})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,11 +93,24 @@ class ProductDetailOne extends StatelessWidget {
           // ! 5. BUTTONS FOR CART AND BUYNOW
           Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
             MultipleBtn(
-                btnName: 'Add to Cart',
+                btnName: cartNumber!.any((e) => e.product!.id!
+                            .contains(prodNumber.id.toString())) ==
+                        false
+                    ? 'Add to Cart'
+                    : 'Go to Cart',
                 submitMethod: () {
-                  // !   PRODUCT page send data in cart
-                  BlocProvider.of<ProdwithcartBloc>(context)
-                    ..add(ProdAddedCartEvent(product_id: prodNumber.id));
+                  // ! PRODUCT DOES'NT EXIST IN CART
+                  if (cartNumber!.any((e) =>
+                          e.product!.id!.contains(prodNumber.id.toString())) ==
+                      false) {
+                    BlocProvider.of<ProdwithcartBloc>(context)
+                      ..add(ProdAddedCartEvent(
+                          product_id: prodNumber.id, quantity: 100));
+                  } // ! PRODUCT  EXIST IN CART
+                  else {
+                    Navigator.of(context)
+                        .pushReplacementNamed(CartScr.routeName);
+                  }
                 }),
             MultipleBtn(
               btnName: 'BuyNow',

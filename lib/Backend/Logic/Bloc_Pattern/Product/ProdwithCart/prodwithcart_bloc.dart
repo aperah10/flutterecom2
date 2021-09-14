@@ -33,15 +33,7 @@ class ProdwithcartBloc extends Bloc<ProdwithcartEvent, ProdwithcartState> {
         // print('-----------------------------------------------------------');
         // print(productData.any((e) => e.title!.contains('p1')));
         // print(cartData.any((e) => e.product!.id!.contains('p1')));
-        // for (var p in productData) {
-        //   if (cartData.any((e) => e.product!.id!.contains(p.id.toString())) ==
-        //       false) {
-        //     print('yes');
-        //     print(p.title);
-        //   } else {
-        //     print('no');
-        //   }
-        // }
+
         yield ProductCartLoadedState(
             productData: productData, cartData: cartData);
       } catch (e) {
@@ -53,21 +45,21 @@ class ProdwithcartBloc extends Bloc<ProdwithcartEvent, ProdwithcartState> {
     /*                  // ! CART ADDED , ADDING  , DELETING BLOC                 */
     /* -------------------------------------------------------------------------- */
     if (event is ProdAddingCartEvent) {
-      print('ProdAddingCartEvent Happend');
+      // print('ProdAddingCartEvent Happend');
 
       //  List<NewCart> cartData = await cartRespo.getCartData();
       yield ProdAddingCartState(cartItems: event.cartItems);
     }
 
     if (event is ProdAddedCartEvent) {
-      print('ProdAddedCartEvent Happend');
+      // print('ProdAddedCartEvent Happend');
 
       // print(event.quantity);
       // bool prodid = await cartRespo.addCartData(
       //     product_id: event.product_id, quantity: event.quantity);
       List<NewCart> prodList = await cartRespo.addCartData(
           product_id: event.product_id, quantity: event.quantity);
-      print('RESULT  OF ADDTOCART :- $prodList');
+      // print('RESULT  OF ADDTOCART :- $prodList');
       yield ProdAddedCartState(cartItems: prodList);
     }
     if (event is ProdDeleteCartEvent) {
