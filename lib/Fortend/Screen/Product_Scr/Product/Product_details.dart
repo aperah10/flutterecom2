@@ -50,7 +50,9 @@ class ProductDetailOne extends StatelessWidget {
         // fit: StackFit.expand,
         children: <Widget>[
           // ! 1. PRODUCT PIC
-          SinglePic(),
+          SinglePic(
+            prodNumber.pic == null ? '' : prodNumber.pic,
+          ),
 
           // ! 2.  TITLE
           TxtTitle('Title'),

@@ -12,8 +12,8 @@ class CusRLRespo {
   // LOGIN PAGE
   Future<bool> loginRespo(
       {required String phone, required String password}) async {
-    String baseUrl = "https://djecoms.herokuapp.com/login/";
-    // String baseUrl = "https://reqres.in/api/login";
+    // String baseUrl = "https://djecoms.herokuapp.com/login/";
+    String baseUrl = "http://rahulaperah.pythonanywhere.com/login/";
 
     try {
       var res = await http.post(Uri.parse(baseUrl),
@@ -61,7 +61,8 @@ class CusRLRespo {
       required String phone,
       required String fullname,
       required String password}) async {
-    String baseUrl = "https://djecoms.herokuapp.com/crusr";
+    // String baseUrl = "https://djecoms.herokuapp.com/crusr";
+    String baseUrl = "http://rahulaperah.pythonanywhere.com/crusr";
 
     try {
       var res = await http.post(Uri.parse(baseUrl),

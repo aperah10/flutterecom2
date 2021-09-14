@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Product/ProdwithCart/prodwithcart_bloc.dart';
 import 'package:secd_ecom/Backend/Respo/Product/ProdRespo.dart';
 import 'package:secd_ecom/Fortend/CusField/Buttons_C.dart';
+import 'package:secd_ecom/Fortend/CusField/Image_C.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Cart/Cart.dart';
 import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 
@@ -32,16 +33,26 @@ class _ProductGridScrState extends State<ProductGridScr> {
     return BlocConsumer<ProdwithcartBloc, ProdwithcartState>(
         listener: (context, state) {
       if (state is ProdAddedCartState) {
-        print('THis is ProductAdded State ${state.cartItems}');
-        Scaffold(body: Center(child: Text('PRODUCT ADDED IN CART')));
+        // print('THis is ProductAdded State ${state.cartItems}');
+        Navigator.of(context).pushReplacementNamed(ProductGridScr.routeName);
       }
     }, builder: (context, state) {
-      print("produc page state: $state");
+      // print("produc page state: $state");
       if (state is ProductCartLoadingState) {
         return Center(child: CircularProgressIndicator());
       }
       if (state is ProductCartErrorState) {
-        return Center(child: Text(' this is eror ${state.message}'));
+        Scaffold.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text('Login Failure'), Icon(Icons.error)],
+              ),
+              backgroundColor: Colors.red,
+            ),
+          );
       }
       if (state is ProductCartLoadedState) {
         return ProdScrOne(
@@ -118,9 +129,10 @@ class ProdGridList extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           itemBuilder: (context, index) {
             // print(cartState.length);
+
             return ProdGridListShow(
               prodNumber: prodState[index],
-              // cartNumber: cartState,
+              cartNumber: cartState,
             );
           }),
     );
@@ -132,9 +144,15 @@ class ProdGridList extends StatelessWidget {
 /* -------------------------------------------------------------------------- */
 class ProdGridListShow extends StatelessWidget {
   dynamic prodNumber;
-  dynamic cartNumber;
-  ProdGridListShow({Key? key, this.prodNumber, this.cartNumber})
+  List cartNumber;
+  ProdGridListShow({Key? key, this.prodNumber, required this.cartNumber})
       : super(key: key);
+
+  // cartFun() {
+  //   for (var p in cartNumber) {
+  //     print(p);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +162,10 @@ class ProdGridListShow extends StatelessWidget {
         width: 180.0,
         child: Wrap(
           children: <Widget>[
-            Image.asset(prodNumber.pic == null ? '' : prodNumber.pic),
+            // Image.network(prodNumber.pic == null ? '' : prodNumber.pic),
+            // ! PRODUCT PIC
+            MultiplePic(prodNumber.pic == null ? '' : prodNumber.pic),
+            // ! END PRODUCT PIC
             ListTile(
               onTap: () {
                 Navigator.push(
@@ -168,13 +189,23 @@ class ProdGridListShow extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // SingleBtn(btnName: 'Save')
                 MultipleBtn(
-                  btnName: 'a' == 'a' ? "gcart" : 'acart',
+                  btnName: cartNumber.any((e) => e.product!.id!
+                              .contains(prodNumber.id.toString())) ==
+                          false
+                      ? 'acart'
+                      : 'gcart',
                   submitMethod: () {
-                    BlocProvider.of<ProdwithcartBloc>(context)
-                      ..add(ProdAddedCartEvent(
-                          product_id: prodNumber.id, quantity: 999));
+                    if (cartNumber.any((e) => e.product!.id!
+                            .contains(prodNumber.id.toString())) ==
+                        false) {
+                      BlocProvider.of<ProdwithcartBloc>(context)
+                        ..add(ProdAddedCartEvent(
+                            product_id: prodNumber.id, quantity: 100));
+                    } else {
+                      Navigator.of(context)
+                          .pushReplacementNamed(CartScr.routeName);
+                    }
                   },
                 ),
                 MultipleBtn(btnName: 'Buy', submitMethod: () {})

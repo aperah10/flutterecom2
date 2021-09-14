@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 /*                          // ! PRODUCT DETAILS PIC                          */
 /* -------------------------------------------------------------------------- */
 class SinglePic extends StatelessWidget {
-  const SinglePic({Key? key}) : super(key: key);
+  dynamic prodPic;
+  SinglePic(this.prodPic, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +15,12 @@ class SinglePic extends StatelessWidget {
       child: Padding(
           padding: EdgeInsets.all(20.0),
           child: Center(
-            child: Image(
-              image: itemImage(),
+            child: Image.network(
+              prodPic,
               fit: BoxFit.cover,
             ),
           )),
     );
-  }
-
-  ImageProvider itemImage() {
-    AssetImage image = AssetImage("");
-    return image;
   }
 }
 
@@ -32,17 +28,41 @@ class SinglePic extends StatelessWidget {
 /*                                // ! CART PIC                               */
 /* -------------------------------------------------------------------------- */
 class CartPic extends StatelessWidget {
-  const CartPic({Key? key}) : super(key: key);
+  dynamic cartPic;
+  CartPic(this.cartPic, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 130,
+      width: 180,
       decoration: BoxDecoration(
           image: DecorationImage(
-        image: NetworkImage(''),
+        image: NetworkImage(cartPic == null ? '' : cartPic),
         fit: BoxFit.cover,
       )),
+    );
+  }
+}
+
+// !PRODUCT CATEGROY PIC
+class MultiplePic extends StatelessWidget {
+  dynamic prodPic;
+  MultiplePic(
+    this.prodPic, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 150,
+      height: 150,
+      child: Image.network(
+        prodPic,
+        width: 30.0,
+        height: 30,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }

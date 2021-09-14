@@ -12,6 +12,9 @@ LocalStorage storage = new LocalStorage('usertoken');
 var token = storage.getItem('token');
 
 class AddressDataRespo {
+  /* -------------------------------------------------------------------------- */
+  /*                       // ! GET ALL DATA FROM ADDRESS                       */
+  /* -------------------------------------------------------------------------- */
   Future<List<Address>> getAddressData() async {
     String baseUrl = 'https://djecoms.herokuapp.com/address/';
     try {
@@ -96,4 +99,60 @@ class AddressDataRespo {
       return Future.error("Error Fetching Data !");
     }
   }
+
+  // /* -------------------------------------------------------------------------- */
+  // /*                         // ! UPDATE ADDRESS METHOD                         */
+  // /* -------------------------------------------------------------------------- */
+  // Future<List<Address>> upAddressData({
+  //    String fullname,
+  //    String email,
+  //    String phone,
+  //    String house,
+  //    String trade,
+  //    String area,
+  //    String city,
+  //    String pin_code,
+  //    String delTime,
+  //  String state,
+  // }) async {
+  //   String Baseurl = 'https://djecoms.herokuapp.com/address/';
+  //   // var token = storage.getItem('token');
+  //   try {
+  //     var res = await http.post(Uri.parse(Baseurl),
+  //         body: json.encode({
+  //           "fullname": fullname,
+  //           "email": email,
+  //           "phone": phone,
+  //           "house": house,
+  //           "trade": trade,
+  //           "area": area,
+  //           "city": city,
+  //           "pin_code": pin_code,
+  //           "delTime": delTime,
+  //           "state": state,
+  //         }),
+  //         headers: {
+  //           "Content-Type": "application/json; charset=UTF-8",
+  //           'Authorization': "token $token"
+  //         });
+  //     var data = json.decode(res.body) as Map;
+  //     print('this is data $data');
+  //     print(res.body);
+  //     print('CART POST MEHTOD Statuc Code  :-  ${res.statusCode}');
+
+  //     if (res.statusCode == 200) {
+  //       return getAddressData();
+  //       // return true;
+  //     }
+  //     return Future.error("Error Fetching Data !");
+
+  //     // return false;
+  //   } catch (e) {
+  //     print("e ADDRESS");
+  //     print(e);
+  //     // return false;
+  //     return Future.error("Error Fetching Data !");
+  //   }
+  // }
+
 }

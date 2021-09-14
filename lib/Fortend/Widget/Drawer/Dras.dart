@@ -4,6 +4,8 @@ import 'package:secd_ecom/Fortend/Screen/Product_Scr/Cart/Cart.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Product/Product_Cat.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Search/SearchProduct.dart';
 import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Acc_P.dart';
+import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Edit_Show_P.dart';
+import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Edit_Show_P2.dart';
 import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/ShowP.dart';
 
 class MyDrawerList extends StatefulWidget {

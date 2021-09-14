@@ -18,6 +18,7 @@ class ProductCartLoadingState extends ProdwithcartState {
 class ProductCartLoadedState extends ProdwithcartState {
   List<ProductC> productData;
   List<NewCart> cartData;
+
   ProductCartLoadedState({
     required this.productData,
     required this.cartData,

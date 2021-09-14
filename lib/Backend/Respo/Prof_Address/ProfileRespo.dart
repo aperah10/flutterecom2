@@ -14,7 +14,8 @@ var token = storage.getItem('token');
 
 class ProfileDataRespo {
   Future<List<Profile>> getProfileData() async {
-    String baseUrl = 'https://djecoms.herokuapp.com/profile/';
+    // String baseUrl = 'https://djecoms.herokuapp.com/profile/';
+    String baseUrl = 'http://rahulaperah.pythonanywhere.com/profile/';
     try {
       var res = await http.get(Uri.parse(baseUrl), headers: {
         "Authorization": "token $token",

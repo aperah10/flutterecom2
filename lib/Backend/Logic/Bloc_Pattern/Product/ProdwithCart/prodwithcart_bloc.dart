@@ -29,10 +29,19 @@ class ProdwithcartBloc extends Bloc<ProdwithcartEvent, ProdwithcartState> {
       try {
         List<ProductC> productData = await prodRespo.getProduct();
         List<NewCart> cartData = await cartRespo.getCartData();
-
+        bool cartPos;
         // print('-----------------------------------------------------------');
-        // print('productData:- $productData ');
-        // print('cartData:- $cartData ');
+        // print(productData.any((e) => e.title!.contains('p1')));
+        // print(cartData.any((e) => e.product!.id!.contains('p1')));
+        // for (var p in productData) {
+        //   if (cartData.any((e) => e.product!.id!.contains(p.id.toString())) ==
+        //       false) {
+        //     print('yes');
+        //     print(p.title);
+        //   } else {
+        //     print('no');
+        //   }
+        // }
         yield ProductCartLoadedState(
             productData: productData, cartData: cartData);
       } catch (e) {

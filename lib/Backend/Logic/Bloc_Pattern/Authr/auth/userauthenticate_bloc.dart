@@ -32,7 +32,7 @@ class UserauthenticateBloc
         bool hasToken = await userLoginStorage.getItem('usertoken');
         // bool reghasToken = await userLoginStorage.reghasToken();
         // print('this is register token $reghasToken');
-        print('this is login token $hasToken');
+        // print('this is login token $hasToken');
         // if (reghasToken == true || hasToken == true) {
         //   yield AuthenticatedAuthenticated();
         // }

@@ -33,7 +33,7 @@ class _CartScrState extends State<CartScr> {
     return BlocConsumer<CartpBloc, CartpState>(
         listener: (context, state) {},
         builder: (context, state) {
-          print("produc page state: $state");
+          // print("produc page state: $state");
           if (state is CartLoadingState) {
             return Center(child: CircularProgressIndicator());
           }
@@ -150,12 +150,23 @@ class CartListScr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RoundedContainer(
-      padding: const EdgeInsets.all(0),
-      margin: EdgeInsets.all(10),
-      height: 180,
+      padding: const EdgeInsets.all(2.0),
+      margin: EdgeInsets.all(2),
+      height: 200,
+      width: 300,
       child: Row(children: <Widget>[
         // ! 1  Product PIC
-        CartPic(),
+        // CartPic(cartNumber.product.pic),
+        Container(
+          width: 150,
+          height: 150,
+          child: Image.network(
+            cartNumber.product.pic == null ? '' : cartNumber.product.pic,
+            width: 30.0,
+            height: 30,
+            fit: BoxFit.cover,
+          ),
+        ),
 
         // !2. CART DATA
         Flexible(

@@ -29,7 +29,7 @@ class _FieldFState extends State<FieldF> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 50,
+        height: 80,
         width: double.infinity,
         margin: EdgeInsets.only(),
         child: TextFormField(

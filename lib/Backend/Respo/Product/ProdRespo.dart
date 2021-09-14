@@ -16,7 +16,8 @@ abstract class ProductRespo {
 }
 
 class ProductDataRespo extends ProductRespo {
-  String baseUrl = 'https://djecoms.herokuapp.com/p/';
+  // String baseUrl = 'https://djecoms.herokuapp.com/p/';
+  String baseUrl = 'http://rahulaperah.pythonanywhere.com/p/';
   @override
   Future<List<ProductC>> getProduct() async {
     try {

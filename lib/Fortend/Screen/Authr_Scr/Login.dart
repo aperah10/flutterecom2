@@ -51,7 +51,7 @@ class LoginOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<UserloginBloc, UserloginState>(listener:
         (context, state) {
-      print('this is login ${state}');
+      // print('this is login ${state}');
       if (state is LoginFailure) {
         Scaffold.of(context).showSnackBar(
           SnackBar(

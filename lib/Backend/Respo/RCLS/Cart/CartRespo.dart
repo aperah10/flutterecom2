@@ -21,7 +21,9 @@ var token = storage.getItem('token');
 
 class CartDataRespo {
   Future<List<NewCart>> getCartData() async {
-    String baseUrl = 'https://djecoms.herokuapp.com/cart/';
+    // String baseUrl = 'https://djecoms.herokuapp.com/cart/';
+    String baseUrl = 'http://rahulaperah.pythonanywhere.com/cart';
+
     try {
       var res = await http.get(Uri.parse(baseUrl), headers: {
         "Authorization": "token $token",
@@ -56,10 +58,11 @@ class CartDataRespo {
   Future<List<NewCart>> addCartData(
       {required String product_id, required int quantity}) async {
     print('this is qunatity,:-$quantity');
-    String Baseurl = 'https://djecoms.herokuapp.com/pm/';
+    // String Baseurl = 'https://djecoms.herokuapp.com/pm/';
+    String baseUrl = 'http://rahulaperah.pythonanywhere.com/pm/';
     var token = storage.getItem('token');
     try {
-      var res = await http.post(Uri.parse(Baseurl),
+      var res = await http.post(Uri.parse(baseUrl),
           body: json.encode({
             "quantity": quantity,
             "product": product_id,
