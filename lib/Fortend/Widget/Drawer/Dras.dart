@@ -8,8 +8,9 @@ import 'package:secd_ecom/Fortend/Screen/Product_Scr/Cart/Cart.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Product/Product_Cat.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Search/SearchProduct.dart';
 import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Acc_P.dart';
-import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Edit_Show_P.dart';
-import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Edit_Show_P2.dart';
+import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Edit_P.dart';
+import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Profile.dart';
+import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/ProfileM.dart';
 import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/ShowP.dart';
 
 class MyDrawerList extends StatefulWidget {
@@ -49,25 +50,34 @@ class _MyDrawerListState extends State<MyDrawerList> {
             icon: Icons.account_balance,
             createPage: () => AccountScr()),
         CusDrawerList(
-            title: ' Edit Profile',
-            icon: Icons.add_a_photo_rounded,
+            title: 'ProfileMix',
+            icon: Icons.photo,
+            createPage: () => ProfileScr()),
+        CusDrawerList(
+            title: 'ProfileEdit',
+            icon: Icons.photo,
+            createPage: () => ProfileEditScr()),
+        CusDrawerList(
+            title: 'ProfileShow',
+            icon: Icons.photo,
             createPage: () => ProfileShowScr()),
-        CusDrawerList(
-            title: ' Order Page',
-            icon: Icons.add_a_photo_rounded,
-            createPage: () => ConfirmOrderPage()),
-        CusDrawerList(
-            title: ' Order 2',
-            icon: Icons.one_k_rounded,
-            createPage: () => MyOrdersScreen()),
-        CusDrawerList(
-            title: ' Payment page',
-            icon: Icons.payment,
-            createPage: () => PaymentPage()),
-        CusDrawerList(
-            title: ' Payment page 2',
-            icon: Icons.payment,
-            createPage: () => PaymentScreen()),
+
+        // CusDrawerList(
+        //     title: ' Order Page',
+        //     icon: Icons.add_a_photo_rounded,
+        //     createPage: () => ConfirmOrderPage()),
+        // CusDrawerList(
+        //     title: ' Order 2',
+        //     icon: Icons.one_k_rounded,
+        //     createPage: () => MyOrdersScreen()),
+        // CusDrawerList(
+        //     title: ' Payment page',
+        //     icon: Icons.payment,
+        //     createPage: () => PaymentPage()),
+        // CusDrawerList(
+        //     title: ' Payment page 2',
+        //     icon: Icons.payment,
+        //     createPage: () => PaymentScreen()),
       ])),
     );
   }

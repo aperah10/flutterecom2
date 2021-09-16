@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 
-class FieldF extends StatefulWidget {
+class FieldForms extends StatefulWidget {
   bool obscureTxt;
   final TextInputType? inputType;
   final String? placeholder;
   String? labelText;
+  bool? status;
+  String? pageName;
   final TextEditingController? controller;
   String? Function(String?)? formValidator;
   bool brd;
-  FieldF(
+  FieldForms(
       {Key? key,
       this.inputType,
       this.placeholder,
       this.controller,
       this.formValidator,
       this.labelText,
+      this.status,
+      this.pageName,
       this.brd = true,
       this.obscureTxt = false})
       : super(key: key);
@@ -23,7 +27,7 @@ class FieldF extends StatefulWidget {
   _FieldFState createState() => _FieldFState();
 }
 
-class _FieldFState extends State<FieldF> {
+class _FieldFState extends State<FieldForms> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -68,5 +72,44 @@ class _FieldFState extends State<FieldF> {
         ),
       ),
     );
+  }
+}
+
+// ! PROFILE FORM FILEDS
+
+class ProfFieldForms extends StatelessWidget {
+  String placeholder;
+  bool status;
+  TextInputType? inputType;
+  final TextEditingController? controller;
+  ProfFieldForms(
+      {Key? key,
+      required this.placeholder,
+      this.status = true,
+      this.inputType,
+      this.controller})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
+        child: new Row(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            new Flexible(
+              child: new TextFormField(
+                decoration: InputDecoration(hintText: placeholder),
+                // ! STATUS MEHTOD
+                enabled: !status,
+                controller: controller,
+                keyboardType: inputType,
+                minLines: 1,
+
+                autofocus: false,
+              ),
+            ),
+          ],
+        ));
   }
 }

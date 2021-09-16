@@ -122,13 +122,13 @@ class _LoginFormState extends State<LoginForm> {
           /* -------------------------------------------------------------------------- */
           /*                                 FORM FIELD                                 */
           /* -------------------------------------------------------------------------- */
-          FieldF(
+          FieldForms(
             placeholder: 'phone',
             controller: usernameController,
             inputType: TextInputType.emailAddress,
             formValidator: (String? val) => formvalid.mobileValidator(val),
           ),
-          FieldF(
+          FieldForms(
               obscureTxt: true,
               placeholder: 'Password',
               controller: passwordController,

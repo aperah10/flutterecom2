@@ -16,7 +16,9 @@ class AddressDataRespo {
   /*                       // ! GET ALL DATA FROM ADDRESS                       */
   /* -------------------------------------------------------------------------- */
   Future<List<Address>> getAddressData() async {
-    String baseUrl = 'https://djecoms.herokuapp.com/address/';
+    // String baseUrl = 'https://djecoms.herokuapp.com/address/';
+    String baseUrl = 'http://rahulaperah.pythonanywhere.com/address/';
+
     try {
       var res = await http.get(Uri.parse(baseUrl), headers: {
         "Authorization": "token $token",
@@ -60,10 +62,11 @@ class AddressDataRespo {
     required String delTime,
     required String state,
   }) async {
-    String Baseurl = 'https://djecoms.herokuapp.com/address/';
+    // String Baseurl = 'https://djecoms.herokuapp.com/address/';
+    String baseUrl = 'http://rahulaperah.pythonanywhere.com/address/';
     // var token = storage.getItem('token');
     try {
-      var res = await http.post(Uri.parse(Baseurl),
+      var res = await http.post(Uri.parse(baseUrl),
           body: json.encode({
             "fullname": fullname,
             "email": email,

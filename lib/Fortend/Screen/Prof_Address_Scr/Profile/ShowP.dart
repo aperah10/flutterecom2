@@ -9,7 +9,7 @@ import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Porf_Address/Profile/profil
 import 'Edit_P.dart';
 
 class ProfileShowScr extends StatelessWidget {
-  static const routeName = '/showp-profile';
+  static const routeName = '/showp-profilepage in ';
   ProfileShowScr({Key? key}) : super(key: key);
 
   @override
@@ -125,17 +125,14 @@ class ProfileShow extends StatelessWidget {
                 ),
 
                 //  ! FORM FILED WIDGET
-                FieldF(
-                  labelText: profState[0].fullname,
-                  brd: false,
+                FieldForms(
+                  placeholder: profState[0].fullname,
                 ),
-                FieldF(
-                  labelText: profState[0].email,
-                  brd: false,
+                FieldForms(
+                  placeholder: profState[0].email,
                 ),
-                FieldF(
-                  labelText: profState[0].gender,
-                  brd: false,
+                FieldForms(
+                  placeholder: profState[0].gender,
                 ),
               ],
             ),

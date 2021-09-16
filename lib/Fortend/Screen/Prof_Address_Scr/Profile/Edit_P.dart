@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:secd_ecom/Afile/ListFile/StateList.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Porf_Address/Profile/profile_bloc.dart';
 import 'package:secd_ecom/Fortend/CusField/Aviatar_Pic.dart';
 import 'package:secd_ecom/Fortend/CusField/Buttons_C.dart';
+import 'package:secd_ecom/Fortend/CusField/Drop_Down_C.dart';
 import 'package:secd_ecom/Fortend/CusField/FormF.dart';
 
 import 'ShowP.dart';
@@ -11,6 +13,17 @@ import 'ShowP.dart';
 class ProfileEditScr extends StatelessWidget {
   static const routeName = '/edit-profile';
   ProfileEditScr({Key? key}) : super(key: key);
+
+  //   // ! PRofile instance
+  // //  ProductshowBloc prodBloc = ProductshowBloc(prodRespo: ProductDataRespo());
+  // ProfileBloc prodBloc = ProfileBloc();
+
+  // @override
+  // void initState() {
+  //   prodBloc = BlocProvider.of<ProfileBloc>(context);
+  //   prodBloc.add(FetchProfileEvent());
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +51,6 @@ class ProfileEditScr extends StatelessWidget {
             print(state.profileData);
             return EditBody(profState: state.profileData);
           }
-          // if (state is ProfileLoadedState) {
-          //   Center(child: Text('${state.profileData}'));
-          // }
 
           return Center(child: CircularProgressIndicator());
         }),
@@ -62,7 +72,7 @@ class EditBody extends StatefulWidget {
 }
 
 class _EditBodyState extends State<EditBody> {
-  final _form = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailsController = TextEditingController();
   final genderController = TextEditingController();
@@ -70,11 +80,11 @@ class _EditBodyState extends State<EditBody> {
   /*                              // ! Profile BUTTON                             */
   /* -------------------------------------------------------------------------- */
   _profileBtn() async {
-    var isvalid = _form.currentState!.validate();
+    var isvalid = formKey.currentState!.validate();
     if (!isvalid) {
       return "Enter the Correct Value";
     }
-    _form.currentState!.save();
+    formKey.currentState!.save();
 
     var isToken = BlocProvider.of<ProfileBloc>(context).add(
       ProfileSaveButtonEvent(
@@ -95,7 +105,7 @@ class _EditBodyState extends State<EditBody> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Form(
-            key: _form,
+            key: formKey,
             child: ListView(
               children: [
                 //  !  staring list item
@@ -118,23 +128,29 @@ class _EditBodyState extends State<EditBody> {
                 ),
 
                 //  ! FORM FILED WIDGET
-                FieldF(
+                FieldForms(
                   inputType: TextInputType.name,
                   controller: nameController,
                   placeholder: 'Enter the Name',
                   brd: false,
                 ),
-                FieldF(
+                FieldForms(
                   inputType: TextInputType.emailAddress,
                   controller: emailsController,
                   placeholder: 'Enter the Email',
                   brd: false,
                 ),
-                FieldF(
-                  inputType: TextInputType.name,
-                  controller: genderController,
-                  placeholder: 'Enter the Gender',
-                  brd: false,
+
+                // FieldForms(
+                //   inputType: TextInputType.name,
+                //   controller: genderController,
+                //   placeholder: 'Enter the Gender',
+                //   brd: false,
+                // ),
+                DropDownBtn(
+                  dName: 'Gender',
+                  listData: AllListData.GenderData,
+                  listController: genderController,
                 ),
 
                 // ! END FORM FIELD PAGE

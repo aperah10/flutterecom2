@@ -126,24 +126,24 @@ class _SignUpFormState extends State<SignUpForm> {
           /* -------------------------------------------------------------------------- */
 
           // NameEdit text
-          FieldF(
+          FieldForms(
               placeholder: 'Name',
               inputType: TextInputType.name,
               controller: fullnameController,
               formValidator: (v) => formvalid.fullnameValidator(v)),
-          FieldF(
+          FieldForms(
             placeholder: 'Mobile',
             inputType: TextInputType.phone,
             controller: phoneController,
             formValidator: (v) => formvalid.mobileValidator(v),
           ),
-          FieldF(
+          FieldForms(
             placeholder: 'Email',
             inputType: TextInputType.emailAddress,
             controller: emailController,
             formValidator: (v) => formvalid.emailValidator(v),
           ),
-          FieldF(
+          FieldForms(
               obscureTxt: true,
               placeholder: 'Password',
               controller: passwordController,

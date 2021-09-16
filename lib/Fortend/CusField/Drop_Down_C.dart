@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:secd_ecom/Afile/ListFile/StateList.dart';
 
 import 'Buttons_C.dart';
 import 'Text_C.dart';
 
-class DropDownBtn extends StatelessWidget {
-  const DropDownBtn({Key? key}) : super(key: key);
+class DropDownBtnF extends StatelessWidget {
+  dynamic listData;
+  DropDownBtnF({Key? key, this.listData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +15,14 @@ class DropDownBtn extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          DropDownOne(dName: 'Select Size'),
+          // DropDownOne(dName: 'Select Size'),
           Padding(
             padding: EdgeInsets.only(left: 15.0, right: 15.0),
           ),
-          DropDownOne(dName: 'Select Color'),
+          DropDownBtn(
+            dName: 'Select Color',
+            listData: listData,
+          ),
         ],
       ),
     );
@@ -25,21 +30,27 @@ class DropDownBtn extends StatelessWidget {
 }
 
 // ! main drop DropDownBtn AND
-class DropDownOne extends StatefulWidget {
+class DropDownBtn extends StatefulWidget {
   String? dName;
-  DropDownOne({Key? key, this.dName}) : super(key: key);
+  dynamic listData;
+
+  TextEditingController? listController = new TextEditingController();
+
+  DropDownBtn({Key? key, this.dName, this.listData, this.listController})
+      : super(key: key);
 
   @override
-  _DropDownOneState createState() => _DropDownOneState();
+  _DropDownBtnState createState() => _DropDownBtnState();
 }
 
-class _DropDownOneState extends State<DropDownOne> {
+class _DropDownBtnState extends State<DropDownBtn> {
   String? dropdownValue;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: DropdownButton<String>(
+        // ! DROP DOWN MENU dropdownValue
         value: dropdownValue,
         icon: const Icon(Icons.arrow_downward),
         iconSize: 24,
@@ -50,17 +61,22 @@ class _DropDownOneState extends State<DropDownOne> {
           color: Colors.deepPurpleAccent,
         ),
         onChanged: (String? newValue) {
+          // ! DROP DOWN MENU  dropdownValue
           setState(() {
             dropdownValue = newValue!;
+            widget.listController!.text = newValue;
           });
         },
-        items: <String>['One', 'Two', 'Free', 'Four']
-            .map<DropdownMenuItem<String>>((String value) {
+        items:
+            // AllListData.GenderData
+            // <String>['Male', 'Female', 'Other']
+            widget.listData.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(value),
           );
         }).toList(),
+        // ! DROP DOWN MENU Dname
         hint: SubTxtTitle(widget.dName),
       ),
     );

@@ -23,14 +23,14 @@ class ProfileDataRespo {
 
       if (res.statusCode == 200) {
         var datar = jsonDecode(res.body);
-        print('datatr $datar');
+        // print('datatr $datar');
         MainProfile mpt = MainProfile.fromJson({'profileData': datar});
         print(
             '----------------------------------------------------------------------------');
         // print('Cart RESPO MPT:- $mpt');
         // List<ProductM> productData = MainProductM.fromJson({'datar':datar});
         List<Profile> profileData = mpt.profileData;
-        print('Cart RESPO PRODDATA :- $profileData');
+        // print('Cart RESPO PRODDATA :- $profileData');
 
         return profileData;
       } else {
@@ -49,10 +49,11 @@ class ProfileDataRespo {
 
   Future<List<Profile>> addProfileData(
       {String? fullname, String? email, String? pic, String? gender}) async {
-    String Baseurl = 'https://djecoms.herokuapp.com/profile/';
+    // String Baseurl = 'https://djecoms.herokuapp.com/profile/';
+    String baseUrl = 'http://rahulaperah.pythonanywhere.com/profile/';
     // var token = storage.getItem('token');
     try {
-      var res = await http.post(Uri.parse(Baseurl),
+      var res = await http.post(Uri.parse(baseUrl),
           body: json.encode({
             "fullname": fullname,
             "email": email,
@@ -64,9 +65,9 @@ class ProfileDataRespo {
             'Authorization': "token $token"
           });
       var data = json.decode(res.body) as Map;
-      print('this is data $data');
-      print(res.body);
-      print('CART POST MEHTOD Statuc Code  :-  ${res.statusCode}');
+      // print('this is data $data');
+      // print(res.body);
+      // print('CART POST MEHTOD Statuc Code  :-  ${res.statusCode}');
 
       if (res.statusCode == 200) {
         return getProfileData();
