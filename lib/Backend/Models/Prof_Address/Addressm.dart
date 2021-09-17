@@ -54,7 +54,8 @@ class Address {
   final String? trade;
   final String? area;
   final String? city;
-  final int? pinCode;
+  // final int? pinCode;
+  final String? pinCode;
   final String? delTime;
   final String? state;
   final String? uplod;

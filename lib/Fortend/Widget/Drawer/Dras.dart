@@ -7,6 +7,7 @@ import 'package:secd_ecom/Fortend/Screen/Order/payment2.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Cart/Cart.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Product/Product_Cat.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Search/SearchProduct.dart';
+import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Address/Show_Address.dart';
 import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Acc_P.dart';
 import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Edit_P.dart';
 import 'package:secd_ecom/Fortend/Screen/Prof_Address_Scr/Profile/Profile.dart';
@@ -37,26 +38,28 @@ class _MyDrawerListState extends State<MyDrawerList> {
             title: 'Product Grid Show',
             icon: Icons.price_check,
             createPage: () => ProductGridScr()),
+
         CusDrawerList(
-            title: ' Cart',
-            icon: Icons.shopping_bag,
-            createPage: () => CartScr()),
-        CusDrawerList(
-            title: ' Search',
-            icon: Icons.search,
-            createPage: () => SerachScr()),
-        CusDrawerList(
-            title: ' Acccount',
-            icon: Icons.account_balance,
-            createPage: () => AccountScr()),
-        CusDrawerList(
-            title: 'ProfileMix',
+            title: 'AddressShow',
             icon: Icons.photo,
-            createPage: () => ProfileScr()),
-        CusDrawerList(
-            title: 'ProfileEdit',
-            icon: Icons.photo,
-            createPage: () => ProfileEditScr()),
+            createPage: () => AddressShowScr()),
+        // CusDrawerList(
+        //     title: ' Cart',
+        //     icon: Icons.shopping_bag,
+        //     createPage: () => CartScr()),
+        // CusDrawerList(
+        //     title: ' Search',
+        //     icon: Icons.search,
+        //     createPage: () => SerachScr()),
+        // CusDrawerList(
+        //     title: ' Acccount',
+        //     icon: Icons.account_balance,
+        //     createPage: () => AccountScr()),
+
+        // CusDrawerList(
+        //     title: 'ProfileEdit',
+        //     icon: Icons.photo,
+        //     createPage: () => ProfileEditScr()),
         CusDrawerList(
             title: 'ProfileShow',
             icon: Icons.photo,

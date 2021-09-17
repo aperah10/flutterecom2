@@ -7,6 +7,7 @@ class FieldForms extends StatefulWidget {
   String? labelText;
   bool? status;
   String? pageName;
+  dynamic onValue;
   final TextEditingController? controller;
   String? Function(String?)? formValidator;
   bool brd;
@@ -20,6 +21,7 @@ class FieldForms extends StatefulWidget {
       this.status,
       this.pageName,
       this.brd = true,
+      this.onValue,
       this.obscureTxt = false})
       : super(key: key);
 
@@ -37,6 +39,13 @@ class _FieldFState extends State<FieldForms> {
         width: double.infinity,
         margin: EdgeInsets.only(),
         child: TextFormField(
+          // onChanged: (String? newValue) {
+          //   // ! DROP DOWN MENU  dropdownValue
+          //   setState(() {
+          //     widget.onValue = newValue;
+          //   });
+          // },
+          initialValue: widget.onValue,
           obscureText: widget.obscureTxt,
           controller: widget.controller,
           keyboardType: widget.inputType,

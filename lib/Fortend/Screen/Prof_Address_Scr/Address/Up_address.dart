@@ -10,9 +10,9 @@ import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 
 import 'Show_Address.dart';
 
-class AddressPostScr extends StatelessWidget {
+class AddressUpScr extends StatelessWidget {
   static const routeName = '/edit-address-post';
-  AddressPostScr({Key? key}) : super(key: key);
+  AddressUpScr({Key? key}) : super(key: key);
 
   //   // ! Address instance
   // //  ProductshowBloc prodBloc = ProductshowBloc(prodRespo: ProductDataRespo());
@@ -49,7 +49,7 @@ class AddressPostScr extends StatelessWidget {
           // print('this is builder ${state}');
           if (state is AddressLoadedState) {
             print(state.addressData);
-            return CreateAddressScreen(adrState: state.addressData);
+            return UpAddress2(adrState: state.addressData);
           }
 
           return Center(child: CircularProgressIndicator());
@@ -59,14 +59,61 @@ class AddressPostScr extends StatelessWidget {
   }
 }
 
-class CreateAddressScreen extends StatefulWidget {
+/* -------------------------------------------------------------------------- */
+/*                                 // !  LOGIC                                */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/*                              // ! ADDRESS SHOW                             */
+/* -------------------------------------------------------------------------- */
+class UpAddress2 extends StatelessWidget {
   dynamic adrState;
-  CreateAddressScreen({Key? key, this.adrState}) : super(key: key);
+  UpAddress2({Key? key, this.adrState}) : super(key: key);
+
   @override
-  _CreateAddressScreenState createState() => _CreateAddressScreenState();
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+        // padding:
+        //     EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // ! Conatiner for listview builder
+        Container(
+          child: GridView.builder(
+              shrinkWrap: true,
+              itemCount: adrState.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+                // childAspectRatio: 0.60,
+                // crossAxisSpacing: 20,
+                //   mainAxisSpacing: 20
+              ),
+              // padding: EdgeInsets.symmetric(horizontal: 20.0),
+              itemBuilder: (context, index) {
+                // print(cartState.length);
+
+                return AddressGridListShow(
+                  adrNumber: adrState[index],
+                );
+              }),
+        )
+
+        // // ! Address field DATA
+      ],
+    ));
+  }
 }
 
-class _CreateAddressScreenState extends State<CreateAddressScreen> {
+class UpAddressScreen extends StatefulWidget {
+  dynamic adrState;
+  UpAddressScreen({Key? key, this.adrState}) : super(key: key);
+  @override
+  _UpAddressScreenState createState() => _UpAddressScreenState();
+}
+
+class _UpAddressScreenState extends State<UpAddressScreen> {
   final _form = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailsController = TextEditingController();

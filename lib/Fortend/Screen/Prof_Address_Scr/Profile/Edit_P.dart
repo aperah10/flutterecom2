@@ -131,26 +131,36 @@ class _EditBodyState extends State<EditBody> {
                 FieldForms(
                   inputType: TextInputType.name,
                   controller: nameController,
-                  placeholder: 'Enter the Name',
+                  placeholder:
+                      widget.profState[0].fullname.toString().isNotEmpty
+                          ? widget.profState[0].fullname
+                          : 'Enter the Name',
                   brd: false,
+                  onValue: widget.profState[0].fullname.toString().isNotEmpty
+                      ? widget.profState[0].fullname
+                      : nameController.text,
                 ),
                 FieldForms(
                   inputType: TextInputType.emailAddress,
                   controller: emailsController,
-                  placeholder: 'Enter the Email',
+                  placeholder: widget.profState[0].email.toString().isNotEmpty
+                      ? widget.profState[0].email
+                      : 'Enter the Email',
                   brd: false,
+                  // onValue: widget.profState[0].email.toString().isNotEmpty
+                  //     ? widget.profState[0].email.toString()
+                  //     : emailsController.text,
                 ),
 
-                // FieldForms(
-                //   inputType: TextInputType.name,
-                //   controller: genderController,
-                //   placeholder: 'Enter the Gender',
-                //   brd: false,
-                // ),
                 DropDownBtn(
-                  dName: 'Gender',
-                  listData: AllListData.GenderData,
+                  dName: widget.profState[0].gender.toString().isNotEmpty
+                      ? widget.profState[0].gender
+                      : 'Gender',
+                  listData: AllListData.genderData,
                   listController: genderController,
+                  onValue: widget.profState[0].gender.toString().isNotEmpty
+                      ? widget.profState[0].gender.toString()
+                      : genderController.text,
                 ),
 
                 // ! END FORM FIELD PAGE

@@ -13,6 +13,9 @@ import 'Fortend/Screen/Authr_Scr/Register.dart';
 import 'Fortend/Screen/Product_Scr/Product/Product_Cat.dart';
 import 'Fortend/Screen/Product_Scr/Product/Product_details.dart';
 
+import 'Fortend/Screen/Prof_Address_Scr/Address/Create_Address.dart';
+import 'Fortend/Screen/Prof_Address_Scr/Address/Show_Address.dart';
+import 'Fortend/Screen/Prof_Address_Scr/Profile/Edit_P.dart';
 import 'Fortend/Screen/Prof_Address_Scr/Profile/ShowP.dart';
 import 'ZExtra/AllproviderList.dart';
 
@@ -70,6 +73,9 @@ class MyApp extends StatelessWidget {
           ProductGridScr.routeName: (ctx) => ProductGridScr(),
           CartScr.routeName: (ctx) => CartScr(),
           ProfileShowScr.routeName: (ctx) => ProfileShowScr(),
+          AddressShowScr.routeName: (ctx) => AddressShowScr(),
+          AddressPostScr.routeName: (ctx) => AddressPostScr(),
+          ProfileEditScr.routeName: (ctx) => ProfileEditScr(),
           // ProductGridView.routeName: (ctx) => ProductGridView(),
           // ProductListView.routeName: (ctx) => ProductListView(),
           // CartScreen.routeName: (ctx) => CartScreen(),

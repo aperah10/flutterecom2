@@ -1,9 +1,7 @@
 import 'dart:core';
 
-import 'package:flutter/foundation.dart';
-
 class AllListData {
-  static List<String> StateData = [
+  static List<String> stateData = [
     "Andhra Pradesh ",
     "Arunachal Pradesh",
     "Assam ",
@@ -36,9 +34,16 @@ class AllListData {
   ];
 
 // ! GENDER LIST
-  static List<String> GenderData = [
+  static List<String> genderData = [
     "Male",
     "Female",
     "Other",
+  ];
+
+// ! DEIVERY LIST
+  static List<String> deliveryData = [
+    "Home (7 am - 9 pm delivery)",
+    "Office (10 am - 6 pm delivery)",
+    "AnyTime"
   ];
 }

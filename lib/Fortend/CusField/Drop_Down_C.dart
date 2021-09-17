@@ -33,10 +33,12 @@ class DropDownBtnF extends StatelessWidget {
 class DropDownBtn extends StatefulWidget {
   String? dName;
   dynamic listData;
+  dynamic onValue;
 
   TextEditingController? listController = new TextEditingController();
 
-  DropDownBtn({Key? key, this.dName, this.listData, this.listController})
+  DropDownBtn(
+      {Key? key, this.dName, this.listData, this.listController, this.onValue})
       : super(key: key);
 
   @override
@@ -64,7 +66,9 @@ class _DropDownBtnState extends State<DropDownBtn> {
           // ! DROP DOWN MENU  dropdownValue
           setState(() {
             dropdownValue = newValue!;
+            widget.onValue = newValue;
             widget.listController!.text = newValue;
+            print('onchnage value  ${widget.onValue}');
           });
         },
         items:

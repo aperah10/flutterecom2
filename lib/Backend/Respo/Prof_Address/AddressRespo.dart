@@ -26,7 +26,7 @@ class AddressDataRespo {
 
       if (res.statusCode == 200) {
         var datar = jsonDecode(res.body);
-        // print('datatr $datar');
+        print('datatr $datar');
         MainAddress mpt = MainAddress.fromJson({'addressData': datar});
         print(
             '----------------------------------------------------------------------------');
@@ -58,7 +58,7 @@ class AddressDataRespo {
     required String trade,
     required String area,
     required String city,
-    required String pin_code,
+    required String pinCode,
     required String delTime,
     required String state,
   }) async {
@@ -75,7 +75,7 @@ class AddressDataRespo {
             "trade": trade,
             "area": area,
             "city": city,
-            "pin_code": pin_code,
+            "pin_code": pinCode,
             "delTime": delTime,
             "state": state,
           }),

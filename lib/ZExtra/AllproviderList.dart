@@ -6,6 +6,7 @@ import 'package:provider/single_child_widget.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Authr/Login/userlogin_bloc.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Authr/Register/register_bloc.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Authr/auth/userauthenticate_bloc.dart';
+import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Porf_Address/Address/address_bloc.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Porf_Address/Profile/profile_bloc.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Product/ProdwithCart/prodwithcart_bloc.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Product/Search_Product/searchproduct_bloc.dart';
@@ -34,6 +35,7 @@ class MainBloc {
       BlocProvider(create: (ctx) => CartpBloc()),
       BlocProvider(create: (ctx) => SearchproductBloc()),
       BlocProvider(create: (ctx) => ProfileBloc()),
+      BlocProvider(create: (ctx) => AddressBloc()),
     ];
   }
 }

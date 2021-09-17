@@ -101,9 +101,15 @@ class ProfileShow extends StatelessWidget {
             child: ListView(
               children: [
                 //  !  staring list item
-                Text(
-                  "Edit Profile",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(ProfileEditScr.routeName);
+                  },
+                  child: Text(
+                    "Edit Profile",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                  ),
                 ),
                 SizedBox(
                   height: 15,
