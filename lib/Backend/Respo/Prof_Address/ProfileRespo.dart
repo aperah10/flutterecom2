@@ -50,7 +50,7 @@ class ProfileDataRespo {
       {String? fullname, String? email, String? pic, String? gender}) async {
     // String Baseurl = 'https://djecoms.herokuapp.com/profile/';
     String baseUrl = 'http://rahulaperah.pythonanywhere.com/profile/';
-    // var token = storage.getItem('token');
+
     try {
       var res = await http.post(Uri.parse(baseUrl),
           body: json.encode({
@@ -64,7 +64,7 @@ class ProfileDataRespo {
             'Authorization': "token $token"
           });
       var data = json.decode(res.body) as Map;
-      // print('this is data $data');
+      print('this is data in post method :- $data');
       // print(res.body);
       // print('CART POST MEHTOD Statuc Code  :-  ${res.statusCode}');
 

@@ -34,7 +34,8 @@ class DropDownBtn extends StatefulWidget {
   String? dName;
   dynamic listData;
   dynamic onValue;
-  final String currentItem;
+  String? currentItem;
+  final ValueChanged<String>? itemCallBack;
 
   TextEditingController? listController = new TextEditingController();
 
@@ -44,25 +45,29 @@ class DropDownBtn extends StatefulWidget {
       this.listData,
       this.listController,
       this.onValue,
-      this.currentItem = ''})
+      this.itemCallBack,
+      this.currentItem})
       : super(key: key);
 
   @override
-  _DropDownBtnState createState() => _DropDownBtnState(currentItem);
+  _DropDownBtnState createState() => _DropDownBtnState();
 }
 
 class _DropDownBtnState extends State<DropDownBtn> {
   String? dropdownValue;
-  String currentItem;
-  _DropDownBtnState(this.currentItem);
+  // String? currentItem;
+  // String initVal ;
+  // _DropDownBtnState(this.currentItem);
 
   @override
   Widget build(BuildContext context) {
+    // print('currentitem value in main function $currentItem');
     return Container(
       child: DropdownButton<String>(
         // ! DROP DOWN MENU dropdownValue
-        // value: dropdownValue,
-        value: currentItem,
+        // value: dropdownValue == null ? 'Gender' : dropdownValue,
+        value: widget.currentItem == null ? 'Gender' : widget.currentItem,
+        isExpanded: true,
         icon: const Icon(Icons.arrow_downward),
         iconSize: 24,
         elevation: 16,
@@ -71,14 +76,15 @@ class _DropDownBtnState extends State<DropDownBtn> {
           height: 2,
           color: Colors.deepPurpleAccent,
         ),
+
         onChanged: (String? newValue) {
-          // ! DROP DOWN MENU  dropdownValue
+          // print('currentItem value in onChnaged $currentItem');
+          //   // ! DROP DOWN MENU  dropdownValue
           setState(() {
             dropdownValue = newValue!;
-            currentItem = newValue;
-            // widget.onValue = newValue;
+            widget.currentItem = newValue;
+
             widget.listController!.text = newValue;
-            print('onchnage value  ${widget.onValue}');
           });
         },
 
@@ -91,6 +97,7 @@ class _DropDownBtnState extends State<DropDownBtn> {
             child: Text(value),
           );
         }).toList(),
+
         // ! DROP DOWN MENU Dname
         hint: SubTxtTitle(widget.dName),
       ),

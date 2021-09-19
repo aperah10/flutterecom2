@@ -42,14 +42,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     /*                  // ! PROFILE ADDED , ADDING  , DELETING BLOC                 */
     /* -------------------------------------------------------------------------- */
     if (event is ProfileSaveButtonEvent) {
-      print('ProdAddedCartEvent Happend');
+      // print('ProdAddedCartEvent Happend');
       List<Profile> prodList = await profRespo.addProfileData(
           fullname: event.fullname,
           email: event.email,
           pic: event.pic,
           gender: event.gender);
 
-      print('RESULT  OF ADDTOCART :- $prodList');
+      print('RESULT  OF Profie Bloc :- $prodList');
       yield ProfileSuccessState();
     }
   }

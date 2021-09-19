@@ -41,13 +41,13 @@ class _FieldFState extends State<FieldForms> {
         width: double.infinity,
         margin: EdgeInsets.only(),
         child: TextFormField(
-          onSaved: (String? newValue) {
-            // ! DROP DOWN MENU  dropdownValue
-            setState(() {
-              widget.onValue = newValue;
-              print('thiis frm dave value ${widget.onValue}');
-            });
-          },
+          // onSaved: (String? newValue) {
+          //   // ! DROP DOWN MENU  dropdownValue
+          //   setState(() {
+          //     widget.onValue = newValue;
+          //     print('thiis frm dave value ${widget.onValue}');
+          //   });
+          // },
           initialValue: widget.inValue,
           obscureText: widget.obscureTxt,
           controller: widget.controller,

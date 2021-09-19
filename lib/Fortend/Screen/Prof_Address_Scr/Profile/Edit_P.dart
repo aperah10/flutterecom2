@@ -31,7 +31,7 @@ class ProfileEditScr extends StatelessWidget {
         body: SafeArea(
       child: BlocListener<ProfileBloc, ProfileState>(
         listener: (context, state) {
-          print('this is listner ${state}');
+          // print('this is listner ${state}');
 
           if (state is ProfileLoadingState) {
             Center(child: CircularProgressIndicator());
@@ -46,7 +46,7 @@ class ProfileEditScr extends StatelessWidget {
         },
         child:
             BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
-          print('this is builder ${state}');
+          // print('this is builder ${state}');
           if (state is ProfileLoadedState) {
             print(state.profileData);
             return EditBody(profState: state.profileData);
@@ -73,13 +73,53 @@ class EditBody extends StatefulWidget {
 
 class _EditBodyState extends State<EditBody> {
   final formKey = GlobalKey<FormState>();
-  final nameController = TextEditingController(text: '');
-  final emailsController = TextEditingController(text: '');
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
   //  TextEditingController ? nameController ;
   //  TextEditingController ?  emailsController ;
   final genderController = TextEditingController();
   dynamic nameSaved;
   dynamic emailSaved;
+  dynamic genderSaved;
+  _profileBtn() async {
+    var isvalid = formKey.currentState!.validate();
+    if (!isvalid) {
+      return "Enter the Correct Value";
+    }
+    formKey.currentState!.save();
+    // // ! gender saved logic
+    if (widget.profState[0].gender == null ||
+        genderController.text == 'Gender') {
+          genderSaved
+        }
+
+    // String genderSaved =
+    //     widget.profState[0].gender != null ? widget.profState[0].gender : null;
+
+    var isToken = BlocProvider.of<ProfileBloc>(context).add(
+      ProfileSaveButtonEvent(
+        // fullname: nameSaved.toString(),
+        // email: emailSaved.toString(),
+        fullname: nameController.text,
+        email: emailController.text,
+        gender: genderController.text.isNotEmpty ||genderController.text ='Gender'
+            ? genderController.text
+            : widget.profState[0].gender,
+        // gender: genderSaved.toString(),
+      ),
+    );
+    print(genderController.text.isEmpty ? 'yes is emptyh' : 'no is not empty');
+    print(genderController.value);
+    // print('gender Sved $genderSaved');
+    // print('nameSaved ${nameSaved}');
+    // print('emailSaved ${emailSaved}');
+    // print('nameController ${nameController.text}');
+    // print('emailController ${emailController.text}');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                             // ! END PROFILE BUTTON FORM                            */
+  /* -------------------------------------------------------------------------- */
 
   @override
   Widget build(BuildContext context) {
@@ -117,22 +157,16 @@ class _EditBodyState extends State<EditBody> {
                       : '',
                   inputType: TextInputType.name,
                   // controller: nameController,
-                  placeholder:
-                      widget.profState[0].fullname.toString().isNotEmpty
-                          ? widget.profState[0].fullname
-                          : 'Enter the Name',
+                  placeholder: 'Enter the Name',
                   // brd: false,
                   onValue: (String? newValue) {
                     // ! DROP DOWN MENU  dropdownValue
                     setState(() {
                       nameSaved = newValue;
                       nameController.text = nameSaved;
-                      print('thiis frm value ${nameSaved}');
+                      // print('thiis frm value ${nameSaved}');
                     });
                   },
-                  // widget.profState[0].fullname.toString().isNotEmpty
-                  //     ? widget.profState[0].fullname
-                  //     : nameController,
                 ),
                 // !EMAIL FILE D
                 ProfFieldForms(
@@ -140,23 +174,17 @@ class _EditBodyState extends State<EditBody> {
                       ? widget.profState[0].email.toString()
                       : '',
                   inputType: TextInputType.emailAddress,
-                  // controller: emailsController,
-                  placeholder: widget.profState[0].email.toString().isNotEmpty
-                      ? widget.profState[0].email
-                      : 'Enter the Email',
+                  // controller: emailController,
+                  placeholder: 'Enter the Email',
                   // brd: false,
                   onValue: (String? newValue) {
                     // ! DROP DOWN MENU  dropdownValue
                     setState(() {
                       emailSaved = newValue;
-                      emailsController.text = emailSaved;
-                      print('thiis frm dave value ${emailSaved}');
+                      emailController.text = emailSaved;
+                      // print('thiis frm dave value ${emailSaved}');
                     });
                   },
-
-                  // widget.profState[0].email.toString().isNotEmpty
-                  //     ? widget.profState[0].email.toString()
-                  //     : emailsController
                 ),
 
                 DropDownBtn(
@@ -166,8 +194,9 @@ class _EditBodyState extends State<EditBody> {
                   listData: AllListData.genderData,
                   listController: genderController,
                   currentItem: widget.profState[0].gender.toString().isNotEmpty
-                      ? widget.profState[0].gender.toString()
-                      : '',
+                      ? widget.profState[0].gender
+                      : 'Gender',
+                  // onValue:   ,
                 ),
 
                 // ! END FORM FIELD PAGE
@@ -207,28 +236,5 @@ class _EditBodyState extends State<EditBody> {
   /* -------------------------------------------------------------------------- */
   /*                              // ! Profile BUTTON                             */
   /* -------------------------------------------------------------------------- */
-  _profileBtn() async {
-    var isvalid = formKey.currentState!.validate();
-    if (!isvalid) {
-      return "Enter the Correct Value";
-    }
-    formKey.currentState!.save();
 
-    var isToken = BlocProvider.of<ProfileBloc>(context).add(
-      ProfileSaveButtonEvent(
-          // fullname: nameSaved.toString(),
-          // email: emailSaved.toString(),
-          fullname: nameController.text,
-          email: emailsController.text,
-          gender: genderController.text),
-    );
-    print('nameSaved ${nameSaved}');
-    print('emailSaved ${emailSaved}');
-    print('nameController ${nameController.text}');
-    print('emailController ${emailsController.text}');
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                             // ! END PROFILE BUTTON FORM                            */
-  /* -------------------------------------------------------------------------- */
 }
