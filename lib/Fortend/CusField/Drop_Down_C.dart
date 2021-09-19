@@ -34,26 +34,35 @@ class DropDownBtn extends StatefulWidget {
   String? dName;
   dynamic listData;
   dynamic onValue;
+  final String currentItem;
 
   TextEditingController? listController = new TextEditingController();
 
   DropDownBtn(
-      {Key? key, this.dName, this.listData, this.listController, this.onValue})
+      {Key? key,
+      this.dName,
+      this.listData,
+      this.listController,
+      this.onValue,
+      this.currentItem = ''})
       : super(key: key);
 
   @override
-  _DropDownBtnState createState() => _DropDownBtnState();
+  _DropDownBtnState createState() => _DropDownBtnState(currentItem);
 }
 
 class _DropDownBtnState extends State<DropDownBtn> {
   String? dropdownValue;
+  String currentItem;
+  _DropDownBtnState(this.currentItem);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: DropdownButton<String>(
         // ! DROP DOWN MENU dropdownValue
-        value: dropdownValue,
+        // value: dropdownValue,
+        value: currentItem,
         icon: const Icon(Icons.arrow_downward),
         iconSize: 24,
         elevation: 16,
@@ -66,11 +75,13 @@ class _DropDownBtnState extends State<DropDownBtn> {
           // ! DROP DOWN MENU  dropdownValue
           setState(() {
             dropdownValue = newValue!;
-            widget.onValue = newValue;
+            currentItem = newValue;
+            // widget.onValue = newValue;
             widget.listController!.text = newValue;
             print('onchnage value  ${widget.onValue}');
           });
         },
+
         items:
             // AllListData.GenderData
             // <String>['Male', 'Female', 'Other']

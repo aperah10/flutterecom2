@@ -44,7 +44,7 @@ class Profile {
   String? fullname;
   String? email;
   String? gender;
-  dynamic? pic;
+  dynamic pic;
   String? uplod;
 
   factory Profile.fromJson(Map<String, dynamic> json) => Profile(

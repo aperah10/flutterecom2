@@ -8,6 +8,7 @@ class FieldForms extends StatefulWidget {
   bool? status;
   String? pageName;
   dynamic onValue;
+  dynamic inValue;
   final TextEditingController? controller;
   String? Function(String?)? formValidator;
   bool brd;
@@ -22,6 +23,7 @@ class FieldForms extends StatefulWidget {
       this.pageName,
       this.brd = true,
       this.onValue,
+      this.inValue,
       this.obscureTxt = false})
       : super(key: key);
 
@@ -39,13 +41,14 @@ class _FieldFState extends State<FieldForms> {
         width: double.infinity,
         margin: EdgeInsets.only(),
         child: TextFormField(
-          // onChanged: (String? newValue) {
-          //   // ! DROP DOWN MENU  dropdownValue
-          //   setState(() {
-          //     widget.onValue = newValue;
-          //   });
-          // },
-          initialValue: widget.onValue,
+          onSaved: (String? newValue) {
+            // ! DROP DOWN MENU  dropdownValue
+            setState(() {
+              widget.onValue = newValue;
+              print('thiis frm dave value ${widget.onValue}');
+            });
+          },
+          initialValue: widget.inValue,
           obscureText: widget.obscureTxt,
           controller: widget.controller,
           keyboardType: widget.inputType,
@@ -86,19 +89,38 @@ class _FieldFState extends State<FieldForms> {
 
 // ! PROFILE FORM FILEDS
 
-class ProfFieldForms extends StatelessWidget {
+class ProfFieldForms extends StatefulWidget {
   String placeholder;
   bool status;
   TextInputType? inputType;
+  String? labelText;
+  String? pageName;
+  dynamic onValue;
+  dynamic inValue;
   final TextEditingController? controller;
-  ProfFieldForms(
-      {Key? key,
-      required this.placeholder,
-      this.status = true,
-      this.inputType,
-      this.controller})
-      : super(key: key);
+  // var controller = TextEditingController(text: '');
+  String? Function(String?)? formValidator;
+  bool brd;
 
+  ProfFieldForms({
+    Key? key,
+    required this.placeholder,
+    this.status = true,
+    this.inputType,
+    this.controller,
+    this.inValue,
+    this.formValidator,
+    this.labelText,
+    this.pageName,
+    this.onValue,
+    this.brd = true,
+  }) : super(key: key);
+
+  @override
+  _ProfFieldFormsState createState() => _ProfFieldFormsState();
+}
+
+class _ProfFieldFormsState extends State<ProfFieldForms> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -108,14 +130,24 @@ class ProfFieldForms extends StatelessWidget {
           children: <Widget>[
             new Flexible(
               child: new TextFormField(
-                decoration: InputDecoration(hintText: placeholder),
+                decoration: InputDecoration(hintText: widget.placeholder),
                 // ! STATUS MEHTOD
-                enabled: !status,
-                controller: controller,
-                keyboardType: inputType,
+                // enabled: !status,
+                controller: widget.controller,
+                keyboardType: widget.inputType,
                 minLines: 1,
-
+                initialValue: widget.inValue,
+                validator: widget.formValidator,
                 autofocus: false,
+                onSaved: widget.onValue,
+                //     (String? newValue) {
+                //   // ! DROP DOWN MENU  dropdownValue
+                //   setState(() {
+                //     widget.onValue = newValue;
+                //     print('thiis frm dave value ${widget.onValue}');
+                //     // print('thiis frm dave value ${widget.controller}');
+                //   });
+                // },
               ),
             ),
           ],

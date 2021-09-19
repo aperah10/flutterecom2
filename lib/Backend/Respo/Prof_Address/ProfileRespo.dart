@@ -23,14 +23,13 @@ class ProfileDataRespo {
 
       if (res.statusCode == 200) {
         var datar = jsonDecode(res.body);
-        // print('datatr $datar');
+        print('datatr $datar');
         MainProfile mpt = MainProfile.fromJson({'profileData': datar});
         print(
             '----------------------------------------------------------------------------');
-        // print('Cart RESPO MPT:- $mpt');
-        // List<ProductM> productData = MainProductM.fromJson({'datar':datar});
+
         List<Profile> profileData = mpt.profileData;
-        // print('Cart RESPO PRODDATA :- $profileData');
+        // print('Profile RESPO PRODDATA :- $profileData');
 
         return profileData;
       } else {

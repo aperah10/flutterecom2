@@ -73,30 +73,13 @@ class EditBody extends StatefulWidget {
 
 class _EditBodyState extends State<EditBody> {
   final formKey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
-  final emailsController = TextEditingController();
+  final nameController = TextEditingController(text: '');
+  final emailsController = TextEditingController(text: '');
+  //  TextEditingController ? nameController ;
+  //  TextEditingController ?  emailsController ;
   final genderController = TextEditingController();
-  /* -------------------------------------------------------------------------- */
-  /*                              // ! Profile BUTTON                             */
-  /* -------------------------------------------------------------------------- */
-  _profileBtn() async {
-    var isvalid = formKey.currentState!.validate();
-    if (!isvalid) {
-      return "Enter the Correct Value";
-    }
-    formKey.currentState!.save();
-
-    var isToken = BlocProvider.of<ProfileBloc>(context).add(
-      ProfileSaveButtonEvent(
-          fullname: nameController.text,
-          email: emailsController.text,
-          gender: genderController.text),
-    );
-  }
-
-  /* -------------------------------------------------------------------------- */
-  /*                             // ! END PROFILE BUTTON FORM                            */
-  /* -------------------------------------------------------------------------- */
+  dynamic nameSaved;
+  dynamic emailSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -128,28 +111,52 @@ class _EditBodyState extends State<EditBody> {
                 ),
 
                 //  ! FORM FILED WIDGET
-                FieldForms(
+                ProfFieldForms(
+                  inValue: widget.profState[0].fullname.toString().isNotEmpty
+                      ? widget.profState[0].fullname
+                      : '',
                   inputType: TextInputType.name,
-                  controller: nameController,
+                  // controller: nameController,
                   placeholder:
                       widget.profState[0].fullname.toString().isNotEmpty
                           ? widget.profState[0].fullname
                           : 'Enter the Name',
-                  brd: false,
-                  onValue: widget.profState[0].fullname.toString().isNotEmpty
-                      ? widget.profState[0].fullname
-                      : nameController.text,
+                  // brd: false,
+                  onValue: (String? newValue) {
+                    // ! DROP DOWN MENU  dropdownValue
+                    setState(() {
+                      nameSaved = newValue;
+                      nameController.text = nameSaved;
+                      print('thiis frm value ${nameSaved}');
+                    });
+                  },
+                  // widget.profState[0].fullname.toString().isNotEmpty
+                  //     ? widget.profState[0].fullname
+                  //     : nameController,
                 ),
-                FieldForms(
+                // !EMAIL FILE D
+                ProfFieldForms(
+                  inValue: widget.profState[0].email.toString().isNotEmpty
+                      ? widget.profState[0].email.toString()
+                      : '',
                   inputType: TextInputType.emailAddress,
-                  controller: emailsController,
+                  // controller: emailsController,
                   placeholder: widget.profState[0].email.toString().isNotEmpty
                       ? widget.profState[0].email
                       : 'Enter the Email',
-                  brd: false,
-                  // onValue: widget.profState[0].email.toString().isNotEmpty
+                  // brd: false,
+                  onValue: (String? newValue) {
+                    // ! DROP DOWN MENU  dropdownValue
+                    setState(() {
+                      emailSaved = newValue;
+                      emailsController.text = emailSaved;
+                      print('thiis frm dave value ${emailSaved}');
+                    });
+                  },
+
+                  // widget.profState[0].email.toString().isNotEmpty
                   //     ? widget.profState[0].email.toString()
-                  //     : emailsController.text,
+                  //     : emailsController
                 ),
 
                 DropDownBtn(
@@ -158,9 +165,9 @@ class _EditBodyState extends State<EditBody> {
                       : 'Gender',
                   listData: AllListData.genderData,
                   listController: genderController,
-                  onValue: widget.profState[0].gender.toString().isNotEmpty
+                  currentItem: widget.profState[0].gender.toString().isNotEmpty
                       ? widget.profState[0].gender.toString()
-                      : genderController.text,
+                      : '',
                 ),
 
                 // ! END FORM FIELD PAGE
@@ -196,4 +203,32 @@ class _EditBodyState extends State<EditBody> {
           ),
         ));
   }
+
+  /* -------------------------------------------------------------------------- */
+  /*                              // ! Profile BUTTON                             */
+  /* -------------------------------------------------------------------------- */
+  _profileBtn() async {
+    var isvalid = formKey.currentState!.validate();
+    if (!isvalid) {
+      return "Enter the Correct Value";
+    }
+    formKey.currentState!.save();
+
+    var isToken = BlocProvider.of<ProfileBloc>(context).add(
+      ProfileSaveButtonEvent(
+          // fullname: nameSaved.toString(),
+          // email: emailSaved.toString(),
+          fullname: nameController.text,
+          email: emailsController.text,
+          gender: genderController.text),
+    );
+    print('nameSaved ${nameSaved}');
+    print('emailSaved ${emailSaved}');
+    print('nameController ${nameController.text}');
+    print('emailController ${emailsController.text}');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                             // ! END PROFILE BUTTON FORM                            */
+  /* -------------------------------------------------------------------------- */
 }

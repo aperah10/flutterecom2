@@ -29,6 +29,5 @@ class ProfileSaveButtonEvent extends ProfileEvent {
   // List<Object> get props => [fullname, email, gender, pic];
 
   @override
-  String toString() =>
-      'LoginButtonPressed { username: $fullname, password: $email }';
+  String toString() => 'ProfileBtn { username: $fullname, password: $email }';
 }
