@@ -9,14 +9,14 @@ class FieldForms extends StatefulWidget {
   String? pageName;
   dynamic onValue;
   dynamic inValue;
-  final TextEditingController? controller;
+  final TextEditingController controller;
   String? Function(String?)? formValidator;
   bool brd;
   FieldForms(
       {Key? key,
       this.inputType,
       this.placeholder,
-      this.controller,
+      required this.controller,
       this.formValidator,
       this.labelText,
       this.status,

@@ -15,6 +15,7 @@ import 'Fortend/Screen/Product_Scr/Product/Product_details.dart';
 
 import 'Fortend/Screen/Prof_Address_Scr/Address/Create_Address.dart';
 import 'Fortend/Screen/Prof_Address_Scr/Address/Show_Address.dart';
+import 'Fortend/Screen/Prof_Address_Scr/Address/Up_address.dart';
 import 'Fortend/Screen/Prof_Address_Scr/Profile/Edit_P.dart';
 import 'Fortend/Screen/Prof_Address_Scr/Profile/ShowP.dart';
 import 'ZExtra/AllproviderList.dart';
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
           AddressShowScr.routeName: (ctx) => AddressShowScr(),
           AddressPostScr.routeName: (ctx) => AddressPostScr(),
           ProfileEditScr.routeName: (ctx) => ProfileEditScr(),
+          AddressUpScr.routeName: (ctx) => AddressUpScr(),
           // ProductGridView.routeName: (ctx) => ProductGridView(),
           // ProductListView.routeName: (ctx) => ProductListView(),
           // CartScreen.routeName: (ctx) => CartScreen(),

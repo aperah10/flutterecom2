@@ -11,7 +11,7 @@ import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 import 'Show_Address.dart';
 
 class AddressUpScr extends StatelessWidget {
-  static const routeName = '/edit-address-post';
+  static const routeName = '/up-address121-post';
   AddressUpScr({Key? key}) : super(key: key);
 
   //   // ! Address instance
@@ -94,9 +94,8 @@ class UpAddress2 extends StatelessWidget {
               itemBuilder: (context, index) {
                 // print(cartState.length);
 
-                return AddressGridListShow(
-                  adrNumber: adrState[index],
-                );
+                return UpAddressScreen(
+                    adrNumber: adrState[index], adrState: adrState);
               }),
         )
 
@@ -107,8 +106,9 @@ class UpAddress2 extends StatelessWidget {
 }
 
 class UpAddressScreen extends StatefulWidget {
+  dynamic adrNumber;
   dynamic adrState;
-  UpAddressScreen({Key? key, this.adrState}) : super(key: key);
+  UpAddressScreen({Key? key, this.adrNumber, this.adrState}) : super(key: key);
   @override
   _UpAddressScreenState createState() => _UpAddressScreenState();
 }
@@ -116,7 +116,7 @@ class UpAddressScreen extends StatefulWidget {
 class _UpAddressScreenState extends State<UpAddressScreen> {
   final _form = GlobalKey<FormState>();
   final nameController = TextEditingController();
-  final emailsController = TextEditingController();
+  final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final houseController = TextEditingController();
   final tradeController = TextEditingController();
@@ -137,16 +137,36 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
 
     var isToken = BlocProvider.of<AddressBloc>(context).add(
       AddressSaveButtonEvent(
-        fullname: nameController.text,
-        email: emailsController.text,
-        phone: phoneController.text,
-        house: houseController.text,
-        trade: tradeController.text,
-        city: cityController.text,
-        area: areaController.text,
-        state: stateController.text,
-        pinCode: pinCodeController.text,
-        delTime: delTimeController.text,
+        fullname: nameController.text.isNotEmpty
+            ? nameController.text
+            : widget.adrNumber.fullname,
+        email: emailController.text.isNotEmpty
+            ? emailController.text
+            : widget.adrNumber.email,
+        phone: phoneController.text.isNotEmpty
+            ? phoneController.text
+            : widget.adrNumber.phone,
+        house: houseController.text.isNotEmpty
+            ? houseController.text
+            : widget.adrNumber.house,
+        trade: tradeController.text.isNotEmpty
+            ? tradeController.text
+            : widget.adrNumber.trade,
+        city: cityController.text.isNotEmpty
+            ? cityController.text
+            : widget.adrNumber.city,
+        area: areaController.text.isNotEmpty
+            ? areaController.text
+            : widget.adrNumber.area,
+        state: stateController.text.isNotEmpty
+            ? stateController.text
+            : widget.adrNumber.state,
+        pinCode: pinCodeController.text.isNotEmpty
+            ? pinCodeController.text
+            : widget.adrNumber.pinCode,
+        delTime: delTimeController.text.isNotEmpty
+            ? delTimeController.text
+            : widget.adrNumber.delTime,
       ),
     );
   }
@@ -157,8 +177,7 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Container(
+    return Container(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
@@ -171,43 +190,67 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
                 placeholder: 'Name',
                 inputType: TextInputType.name,
                 controller: nameController,
+                inValue: widget.adrNumber.fullname.isNotEmpty
+                    ? widget.adrNumber.fullname
+                    : '',
               ),
               // ! PHONE field
               FieldForms(
                 placeholder: 'Phone',
                 inputType: TextInputType.phone,
                 controller: phoneController,
+                inValue: widget.adrNumber.phone.isNotEmpty
+                    ? widget.adrNumber.phone
+                    : '',
               ),
 
               // ! Email field
               FieldForms(
                 placeholder: 'Email',
                 inputType: TextInputType.emailAddress,
-                controller: emailsController,
+                controller: emailController,
+                inValue: widget.adrNumber.email.isNotEmpty
+                    ? widget.adrNumber.email
+                    : '',
               ),
 
               // ! House field
               FieldForms(
-                  placeholder: 'house',
-                  inputType: TextInputType.name,
-                  controller: houseController),
+                placeholder: 'house',
+                inputType: TextInputType.name,
+                controller: houseController,
+                inValue: widget.adrNumber.house.isNotEmpty
+                    ? widget.adrNumber.house
+                    : '',
+              ),
               // ! Address field
               FieldForms(
-                  placeholder: 'Trade',
-                  inputType: TextInputType.name,
-                  controller: tradeController),
+                placeholder: 'Trade',
+                inputType: TextInputType.name,
+                controller: tradeController,
+                inValue: widget.adrNumber.trade.isNotEmpty
+                    ? widget.adrNumber.trade
+                    : '',
+              ),
 
               // ! City field
               FieldForms(
-                  inputType: TextInputType.name,
-                  placeholder: 'City',
-                  controller: cityController),
+                inputType: TextInputType.name,
+                placeholder: 'City',
+                controller: cityController,
+                inValue: widget.adrNumber.city.isNotEmpty
+                    ? widget.adrNumber.city
+                    : '',
+              ),
 
               // ! City field
               FieldForms(
                 inputType: TextInputType.name,
                 placeholder: 'Area',
                 controller: areaController,
+                inValue: widget.adrNumber.area.isNotEmpty
+                    ? widget.adrNumber.area
+                    : '',
               ),
 
               // ! POSTTAL field
@@ -215,18 +258,27 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
                 inputType: TextInputType.number,
                 placeholder: 'PostalCode',
                 controller: pinCodeController,
+                inValue: widget.adrNumber.pinCode.isNotEmpty
+                    ? widget.adrNumber.pinCode
+                    : '',
               ),
 
               // ! DROP DOWN FOR STATE_LIST
               DropDownBtn(
-                dName: 'State',
+                dName: widget.adrNumber.state.isNotEmpty
+                    ? widget.adrNumber.state
+                    : 'State',
                 listData: AllListData.stateData,
                 listController: stateController,
+                pageName: 'State',
               ),
 
               // ! DELIVEY TIME
               DropDownBtn(
-                dName: 'Delivery Time',
+                dName: widget.adrNumber.delTime.isNotEmpty
+                    ? widget.adrNumber.delTime
+                    : 'Delivery Time',
+                pageName: 'Delivery Time',
                 listData: AllListData.deliveryData,
                 listController: delTimeController,
               ),
@@ -245,6 +297,6 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
           ),
         ),
       ),
-    ));
+    );
   }
 }

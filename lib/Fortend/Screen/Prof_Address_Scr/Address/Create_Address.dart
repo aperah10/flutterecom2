@@ -69,7 +69,7 @@ class CreateAddressScreen extends StatefulWidget {
 class _CreateAddressScreenState extends State<CreateAddressScreen> {
   final _form = GlobalKey<FormState>();
   final nameController = TextEditingController();
-  final emailsController = TextEditingController();
+  final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final houseController = TextEditingController();
   final tradeController = TextEditingController();
@@ -91,7 +91,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen> {
     var isToken = BlocProvider.of<AddressBloc>(context).add(
       AddressSaveButtonEvent(
         fullname: nameController.text,
-        email: emailsController.text,
+        email: emailController.text,
         phone: phoneController.text,
         house: houseController.text,
         trade: tradeController.text,
@@ -136,7 +136,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen> {
               FieldForms(
                 placeholder: 'Email',
                 inputType: TextInputType.emailAddress,
-                controller: emailsController,
+                controller: emailController,
               ),
 
               // ! House field
@@ -175,6 +175,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen> {
                 dName: 'State',
                 listData: AllListData.stateData,
                 listController: stateController,
+                pageName: 'State',
               ),
 
               // ! DELIVEY TIME
@@ -182,6 +183,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen> {
                 dName: 'Delivery Time',
                 listData: AllListData.deliveryData,
                 listController: delTimeController,
+                pageName: 'Delivery Time',
               ),
 
               // Login Button

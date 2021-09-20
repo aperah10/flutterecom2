@@ -35,7 +35,6 @@ class AllListData {
 
 // ! GENDER LIST
   static List<String> genderData = [
-    "Gender",
     "Male",
     "Female",
     "Other",

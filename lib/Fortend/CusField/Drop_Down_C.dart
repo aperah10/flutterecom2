@@ -33,9 +33,9 @@ class DropDownBtnF extends StatelessWidget {
 class DropDownBtn extends StatefulWidget {
   String? dName;
   dynamic listData;
-  dynamic onValue;
+  String pageName;
   String? currentItem;
-  final ValueChanged<String>? itemCallBack;
+  // final ValueChanged<String>? itemCallBack;
 
   TextEditingController? listController = new TextEditingController();
 
@@ -44,8 +44,9 @@ class DropDownBtn extends StatefulWidget {
       this.dName,
       this.listData,
       this.listController,
-      this.onValue,
-      this.itemCallBack,
+      this.pageName = 'Item',
+      // this.onValue,
+      // this.itemCallBack,
       this.currentItem})
       : super(key: key);
 
@@ -55,18 +56,15 @@ class DropDownBtn extends StatefulWidget {
 
 class _DropDownBtnState extends State<DropDownBtn> {
   String? dropdownValue;
-  // String? currentItem;
-  // String initVal ;
-  // _DropDownBtnState(this.currentItem);
 
   @override
   Widget build(BuildContext context) {
-    // print('currentitem value in main function $currentItem');
     return Container(
       child: DropdownButton<String>(
         // ! DROP DOWN MENU dropdownValue
-        // value: dropdownValue == null ? 'Gender' : dropdownValue,
-        value: widget.currentItem == null ? 'Gender' : widget.currentItem,
+        // value: dropdownValue,
+        value: widget.currentItem,
+
         isExpanded: true,
         icon: const Icon(Icons.arrow_downward),
         iconSize: 24,
@@ -78,13 +76,10 @@ class _DropDownBtnState extends State<DropDownBtn> {
         ),
 
         onChanged: (String? newValue) {
-          // print('currentItem value in onChnaged $currentItem');
-          //   // ! DROP DOWN MENU  dropdownValue
           setState(() {
-            dropdownValue = newValue!;
+            dropdownValue = newValue;
             widget.currentItem = newValue;
-
-            widget.listController!.text = newValue;
+            widget.listController!.text = newValue!;
           });
         },
 
@@ -99,7 +94,8 @@ class _DropDownBtnState extends State<DropDownBtn> {
         }).toList(),
 
         // ! DROP DOWN MENU Dname
-        hint: SubTxtTitle(widget.dName),
+        hint: SubTxtTitle(
+            widget.currentItem == null ? widget.pageName : widget.dName),
       ),
     );
   }

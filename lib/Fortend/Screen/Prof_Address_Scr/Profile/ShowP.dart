@@ -131,13 +131,13 @@ class ProfileShow extends StatelessWidget {
                 ),
 
                 //  ! FORM FILED WIDGET
-                FieldForms(
+                ProfFieldForms(
                   placeholder: profState[0].fullname,
                 ),
-                FieldForms(
+                ProfFieldForms(
                   placeholder: profState[0].email,
                 ),
-                FieldForms(
+                ProfFieldForms(
                   placeholder: profState[0].gender,
                 ),
               ],

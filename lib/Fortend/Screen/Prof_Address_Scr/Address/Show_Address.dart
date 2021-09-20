@@ -4,6 +4,7 @@ import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Porf_Address/Address/addres
 import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 
 import 'Create_Address.dart';
+import 'Up_address.dart';
 
 class AddressShowScr extends StatelessWidget {
   static const routeName = '/showp-Addresspage in ';
@@ -154,12 +155,6 @@ class AddressGridListShow extends StatelessWidget {
     this.adrNumber,
   }) : super(key: key);
 
-  // cartFun() {
-  //   for (var p in cartNumber) {
-  //     print(p);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -171,9 +166,15 @@ class AddressGridListShow extends StatelessWidget {
             // ! END PRODUCT PIC
             ListTile(
                 onTap: () {},
-                trailing: Text(
-                  'Edit Address',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                trailing: InkWell(
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(AddressUpScr.routeName);
+                  },
+                  child: Text(
+                    'Edit Address',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 title: Text(
                   adrNumber.fullname,

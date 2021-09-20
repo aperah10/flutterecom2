@@ -87,14 +87,6 @@ class _EditBodyState extends State<EditBody> {
       return "Enter the Correct Value";
     }
     formKey.currentState!.save();
-    // // ! gender saved logic
-    if (widget.profState[0].gender == null ||
-        genderController.text == 'Gender') {
-          genderSaved
-        }
-
-    // String genderSaved =
-    //     widget.profState[0].gender != null ? widget.profState[0].gender : null;
 
     var isToken = BlocProvider.of<ProfileBloc>(context).add(
       ProfileSaveButtonEvent(
@@ -102,14 +94,14 @@ class _EditBodyState extends State<EditBody> {
         // email: emailSaved.toString(),
         fullname: nameController.text,
         email: emailController.text,
-        gender: genderController.text.isNotEmpty ||genderController.text ='Gender'
+        gender: genderController.text.isNotEmpty
             ? genderController.text
             : widget.profState[0].gender,
         // gender: genderSaved.toString(),
       ),
     );
-    print(genderController.text.isEmpty ? 'yes is emptyh' : 'no is not empty');
-    print(genderController.value);
+    // print(genderController.text.isEmpty ? 'yes is emptyh' : 'no is not empty');
+    // print(genderController.value);
     // print('gender Sved $genderSaved');
     // print('nameSaved ${nameSaved}');
     // print('emailSaved ${emailSaved}');
@@ -152,7 +144,7 @@ class _EditBodyState extends State<EditBody> {
 
                 //  ! FORM FILED WIDGET
                 ProfFieldForms(
-                  inValue: widget.profState[0].fullname.toString().isNotEmpty
+                  inValue: widget.profState[0].fullname.isNotEmpty
                       ? widget.profState[0].fullname
                       : '',
                   inputType: TextInputType.name,
@@ -182,12 +174,12 @@ class _EditBodyState extends State<EditBody> {
                     setState(() {
                       emailSaved = newValue;
                       emailController.text = emailSaved;
-                      // print('thiis frm dave value ${emailSaved}');
                     });
                   },
                 ),
 
                 DropDownBtn(
+                  pageName: 'Gender',
                   dName: widget.profState[0].gender.toString().isNotEmpty
                       ? widget.profState[0].gender
                       : 'Gender',
@@ -195,8 +187,8 @@ class _EditBodyState extends State<EditBody> {
                   listController: genderController,
                   currentItem: widget.profState[0].gender.toString().isNotEmpty
                       ? widget.profState[0].gender
-                      : 'Gender',
-                  // onValue:   ,
+                      : null,
+                  // // onValue:   ,
                 ),
 
                 // ! END FORM FIELD PAGE

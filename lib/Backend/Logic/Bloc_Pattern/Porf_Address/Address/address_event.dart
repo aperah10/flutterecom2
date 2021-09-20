@@ -48,3 +48,38 @@ class AddressSaveButtonEvent extends AddressEvent {
   String toString() =>
       'AddressButtonPressed { username: $fullname, password: $email }';
 }
+
+/* -------------------------------------------------------------------------- */
+/*                             // ! UPDATE ADDRESS                            */
+/* -------------------------------------------------------------------------- */
+class AddressUpBtnEvent extends AddressEvent {
+  final String fullname;
+  String? email;
+  final String phone;
+  final String? house;
+  final String? trade;
+  final String area;
+  final String city;
+  final String pinCode;
+  final String? delTime;
+  final String state;
+
+  AddressUpBtnEvent(
+      {required this.fullname,
+      this.email,
+      required this.phone,
+      this.house,
+      this.trade,
+      required this.area,
+      required this.city,
+      required this.pinCode,
+      this.delTime,
+      required this.state});
+
+  @override
+  // List<Object> get props => [fullname, email, gender, pic];
+
+  @override
+  String toString() =>
+      'AddressUpdateBtnPressed { username: $fullname, password: $email }';
+}

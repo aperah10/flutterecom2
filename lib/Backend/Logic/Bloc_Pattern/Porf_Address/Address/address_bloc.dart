@@ -57,5 +57,26 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
       // print('RESULT  OF ADDTOCART :- $prodList');
       yield AddressSuccessState();
     }
+
+    /* -------------------------------------------------------------------------- */
+    /*                  // ! Address UPDATE  , DELETING BLOC                 */
+    /* -------------------------------------------------------------------------- */
+    if (event is AddressUpBtnEvent) {
+      //   // print('ProdAddedCartEvent Happend');
+      List<Address> addrList = await addRespo.upAddressData(
+          fullname: event.fullname,
+          email: event.email,
+          phone: event.phone,
+          house: event.house,
+          trade: event.trade,
+          area: event.area,
+          city: event.city,
+          pinCode: event.pinCode,
+          delTime: event.delTime,
+          state: event.state);
+
+      // print('RESULT  OF ADDTOCART :- $prodList');
+      yield AddressSuccessState();
+    }
   }
 }
