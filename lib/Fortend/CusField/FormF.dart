@@ -8,15 +8,15 @@ class FieldForms extends StatefulWidget {
   bool? status;
   String? pageName;
   dynamic onValue;
-  dynamic inValue;
-  final TextEditingController controller;
+  String? inValue;
+  final TextEditingController? controller;
   String? Function(String?)? formValidator;
   bool brd;
   FieldForms(
       {Key? key,
       this.inputType,
       this.placeholder,
-      required this.controller,
+      this.controller,
       this.formValidator,
       this.labelText,
       this.status,
@@ -90,7 +90,7 @@ class _FieldFState extends State<FieldForms> {
 // ! PROFILE FORM FILEDS
 
 class ProfFieldForms extends StatefulWidget {
-  String placeholder;
+  String? placeholder;
   bool status;
   TextInputType? inputType;
   String? labelText;
@@ -104,7 +104,7 @@ class ProfFieldForms extends StatefulWidget {
 
   ProfFieldForms({
     Key? key,
-    required this.placeholder,
+    this.placeholder,
     this.status = true,
     this.inputType,
     this.controller,

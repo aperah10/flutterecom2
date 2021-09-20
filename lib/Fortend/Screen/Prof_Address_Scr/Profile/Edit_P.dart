@@ -168,7 +168,7 @@ class _EditBodyState extends State<EditBody> {
                   inputType: TextInputType.emailAddress,
                   // controller: emailController,
                   placeholder: 'Enter the Email',
-                  // brd: false,
+                  brd: false,
                   onValue: (String? newValue) {
                     // ! DROP DOWN MENU  dropdownValue
                     setState(() {

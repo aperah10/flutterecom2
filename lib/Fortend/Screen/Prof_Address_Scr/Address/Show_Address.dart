@@ -134,6 +134,7 @@ class AddressShow extends StatelessWidget {
 
                 return AddressGridListShow(
                   adrNumber: adrState[index],
+                  adrState: adrState,
                 );
               }),
         )
@@ -149,10 +150,12 @@ class AddressShow extends StatelessWidget {
 /* -------------------------------------------------------------------------- */
 class AddressGridListShow extends StatelessWidget {
   dynamic adrNumber;
+  dynamic adrState;
 
   AddressGridListShow({
     Key? key,
     this.adrNumber,
+    this.adrState,
   }) : super(key: key);
 
   @override
@@ -168,8 +171,15 @@ class AddressGridListShow extends StatelessWidget {
                 onTap: () {},
                 trailing: InkWell(
                   onTap: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(AddressUpScr.routeName);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                // ! add PRODUCT ITEM DEIALS
+                                AddressUpScr(
+                                  adrNumber: adrNumber,
+                                  adrState: adrState,
+                                )));
                   },
                   child: Text(
                     'Edit Address',
@@ -189,11 +199,19 @@ class AddressGridListShow extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(adrNumber.phone),
-                        Text(adrNumber.house),
-                        Text(adrNumber.trade),
-                        Text(adrNumber.city),
-                        Text(adrNumber.state),
-                        Text(adrNumber.delTime),
+                        Text(adrNumber.house != null
+                            ? adrNumber.house
+                            : 'house number'),
+                        Text(adrNumber.trade != null
+                            ? adrNumber.trade
+                            : 'Trade'),
+                        Text(adrNumber.city != null ? adrNumber.city : 'City'),
+                        Text(adrNumber.state != null
+                            ? adrNumber.state
+                            : 'State'),
+                        Text(adrNumber.delTime != null
+                            ? adrNumber.delTime
+                            : 'DelTime'),
                       ]),
                 )),
           ],

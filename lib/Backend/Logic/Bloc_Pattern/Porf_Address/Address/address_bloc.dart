@@ -63,7 +63,8 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     /* -------------------------------------------------------------------------- */
     if (event is AddressUpBtnEvent) {
       //   // print('ProdAddedCartEvent Happend');
-      List<Address> addrList = await addRespo.upAddressData(
+      List<Address> adrList = await addRespo.upAddressData(
+          id: event.id,
           fullname: event.fullname,
           email: event.email,
           phone: event.phone,
@@ -75,7 +76,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
           delTime: event.delTime,
           state: event.state);
 
-      // print('RESULT  OF ADDTOCART :- $prodList');
+      print('RESULT  OF address update  :- $adrList');
       yield AddressSuccessState();
     }
   }

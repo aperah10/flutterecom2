@@ -24,12 +24,12 @@ class NewCustomUserLoginRespo with ChangeNotifier {
           body: json.encode({"phone": phone, "password": password}));
 
       var data = json.decode(res.body);
-      print(' this is status code :- ${res.statusCode}');
+      // print(' this is status code :- ${res.statusCode}');
 
       if (res.statusCode == 200) {
         var hastoken = storage.setItem("token", data['token']);
         // print('set token ${hastoken}');
-        print(storage.getItem('token'));
+        // print(storage.getItem('token'));
         return true;
       }
 
@@ -61,11 +61,11 @@ class NewCustomUserLoginRespo with ChangeNotifier {
           }));
 
       var data = json.decode(res.body) as Map;
-      print(data);
+      // print(data);
       if (res.statusCode == 200 || data.containsKey("token")) {
         var hastoken = storage.setItem("token", data['token']);
-        print('set token ${hastoken}');
-        print(storage.getItem('token'));
+        // print('set token ${hastoken}');
+        // print(storage.getItem('token'));
         return true;
       }
 

@@ -53,6 +53,7 @@ class AddressSaveButtonEvent extends AddressEvent {
 /*                             // ! UPDATE ADDRESS                            */
 /* -------------------------------------------------------------------------- */
 class AddressUpBtnEvent extends AddressEvent {
+  final String id;
   final String fullname;
   String? email;
   final String phone;
@@ -65,7 +66,8 @@ class AddressUpBtnEvent extends AddressEvent {
   final String state;
 
   AddressUpBtnEvent(
-      {required this.fullname,
+      {required this.id,
+      required this.fullname,
       this.email,
       required this.phone,
       this.house,

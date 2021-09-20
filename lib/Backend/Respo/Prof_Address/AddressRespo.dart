@@ -75,7 +75,7 @@ class AddressDataRespo {
             "trade": trade,
             "area": area,
             "city": city,
-            "pin_code": pinCode,
+            "pinCode": pinCode,
             "delTime": delTime,
             "state": state,
           }),
@@ -84,11 +84,11 @@ class AddressDataRespo {
             'Authorization': "token $token"
           });
       var data = json.decode(res.body) as Map;
-      print(
-          '----------------------------------------------------------------------');
-      print('this is data $data');
-      print(res.body);
-      print('CART POST MEHTOD Statuc Code  :-  ${res.statusCode}');
+      // print(
+      //     '----------------------------------------------------------------------');
+      // print('this is data $data');
+      // print(res.body);
+      // print('CART POST MEHTOD Statuc Code  :-  ${res.statusCode}');
 
       if (res.statusCode == 200) {
         return getAddressData();
@@ -109,6 +109,7 @@ class AddressDataRespo {
   // /*                         // ! UPDATE ADDRESS METHOD                         */
   // /* -------------------------------------------------------------------------- */
   Future<List<Address>> upAddressData({
+    required String id,
     required String fullname,
     String? email,
     required String phone,
@@ -133,7 +134,7 @@ class AddressDataRespo {
             "trade": trade,
             "area": area,
             "city": city,
-            "pin_code": pinCode,
+            "pinCode": pinCode,
             "delTime": delTime,
             "state": state,
           }),
