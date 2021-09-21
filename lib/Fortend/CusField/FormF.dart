@@ -97,6 +97,7 @@ class ProfFieldForms extends StatefulWidget {
   String? pageName;
   dynamic onValue;
   dynamic inValue;
+
   final TextEditingController? controller;
   // var controller = TextEditingController(text: '');
   String? Function(String?)? formValidator;
@@ -133,6 +134,7 @@ class _ProfFieldFormsState extends State<ProfFieldForms> {
                 decoration: InputDecoration(hintText: widget.placeholder),
                 // ! STATUS MEHTOD
                 // enabled: !status,
+
                 controller: widget.controller,
                 keyboardType: widget.inputType,
                 minLines: 1,

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class AllFormValdation with ChangeNotifier {
-  dynamic prod = 5;
   mobileValidator(String? val) {
     if (val == null || val.isEmpty) {
       return 'Enter the Mobile Number';
@@ -26,18 +25,41 @@ class AllFormValdation with ChangeNotifier {
     }
   }
 
-  fullnameValidator(String? val) {
+  postalCodeValid(String? val) {
     if (val == null || val.isEmpty) {
-      return 'Enter the Fullname';
+      return 'Enter the Postal Code';
+    }
+    String pattern = r"^[1-9][0-9]{5}$";
+
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(val)) {
+      return "Enter Vaild PostalCode";
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                          // ! ONLY NULL VALIDATORS                         */
+  /* -------------------------------------------------------------------------- */
+  reqValid(String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is Required';
     }
     return null;
   }
 
-  passwordValidator(String? val) {
+  // ! VALIDATORS FILED WITH NULL VALUE
+  emailVal2(String? val) {
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+    RegExp regex = new RegExp(pattern);
     if (val == null || val.isEmpty) {
-      return 'Enter the Password';
+    } else if (!regex.hasMatch(val)) {
+      return "enter valid email";
     }
 
-    return null;
+    // if (!regex.hasMatch(val!)) {
+    //   return "enter valid email";
+    // }
   }
 }

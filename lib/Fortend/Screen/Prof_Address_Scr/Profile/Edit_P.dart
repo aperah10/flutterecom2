@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:secd_ecom/Afile/ListFile/StateList.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Porf_Address/Profile/profile_bloc.dart';
 import 'package:secd_ecom/Fortend/CusField/Aviatar_Pic.dart';
 import 'package:secd_ecom/Fortend/CusField/Buttons_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Drop_Down_C.dart';
+import 'package:secd_ecom/Fortend/CusField/Form/formValdation.dart';
 import 'package:secd_ecom/Fortend/CusField/FormF.dart';
 
 import 'ShowP.dart';
@@ -92,8 +94,14 @@ class _EditBodyState extends State<EditBody> {
       ProfileSaveButtonEvent(
         // fullname: nameSaved.toString(),
         // email: emailSaved.toString(),
-        fullname: nameController.text,
-        email: emailController.text,
+        // fullname: nameController.text,
+        // email: emailController.text,
+        fullname: nameController.text.isNotEmpty || nameController.text != null
+            ? nameController.text
+            : widget.profState[0].fullname,
+        email: emailController.text.isNotEmpty || emailController.text != null
+            ? emailController.text
+            : widget.profState[0].email,
         gender: genderController.text.isNotEmpty
             ? genderController.text
             : widget.profState[0].gender,
@@ -115,6 +123,11 @@ class _EditBodyState extends State<EditBody> {
 
   @override
   Widget build(BuildContext context) {
+    /* -------------------------------------------------------------------------- */
+    /*                       //  ! FORM VALIDATION PROVIDER                       */
+    /* -------------------------------------------------------------------------- */
+    final formvalid = Provider.of<AllFormValdation>(context);
+
     return Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
         child: Padding(
@@ -144,6 +157,7 @@ class _EditBodyState extends State<EditBody> {
 
                 //  ! FORM FILED WIDGET
                 ProfFieldForms(
+                  formValidator: (String? val) => formvalid.reqValid(val),
                   inValue: widget.profState[0].fullname.isNotEmpty
                       ? widget.profState[0].fullname
                       : '',
@@ -162,8 +176,10 @@ class _EditBodyState extends State<EditBody> {
                 ),
                 // !EMAIL FILE D
                 ProfFieldForms(
-                  inValue: widget.profState[0].email.toString().isNotEmpty
-                      ? widget.profState[0].email.toString()
+                  formValidator: (String? val) => formvalid.emailVal2(val),
+                  inValue: widget.profState[0].email.toString().isNotEmpty ||
+                          widget.profState[0].email != null
+                      ? widget.profState[0].email
                       : '',
                   inputType: TextInputType.emailAddress,
                   // controller: emailController,
@@ -172,8 +188,8 @@ class _EditBodyState extends State<EditBody> {
                   onValue: (String? newValue) {
                     // ! DROP DOWN MENU  dropdownValue
                     setState(() {
-                      emailSaved = newValue;
-                      emailController.text = emailSaved;
+                      // emailSaved = newValue;
+                      emailController.text = newValue!;
                     });
                   },
                 ),

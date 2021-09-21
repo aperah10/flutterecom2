@@ -31,3 +31,11 @@ class CartErrorState extends CartpState {
   @override
   List<Object> get props => [];
 }
+
+class ItemDeletingCartState extends CartpState {
+  List<NewCart> cartItems;
+
+  ItemDeletingCartState({required this.cartItems});
+  @override
+  List<Object> get props => [];
+}

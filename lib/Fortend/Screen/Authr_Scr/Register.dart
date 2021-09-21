@@ -130,7 +130,7 @@ class _SignUpFormState extends State<SignUpForm> {
               placeholder: 'Name',
               inputType: TextInputType.name,
               controller: fullnameController,
-              formValidator: (v) => formvalid.fullnameValidator(v)),
+              formValidator: (v) => formvalid.reqValid(v)),
           FieldForms(
             placeholder: 'Mobile',
             inputType: TextInputType.phone,
@@ -147,7 +147,7 @@ class _SignUpFormState extends State<SignUpForm> {
               obscureTxt: true,
               placeholder: 'Password',
               controller: passwordController,
-              formValidator: (v) => formvalid.passwordValidator(v),
+              formValidator: (v) => formvalid.reqValid(v),
               inputType: TextInputType.visiblePassword),
 
           /* -------------------------------------------------------------------------- */

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Product/ProdwithCart/prodwithcart_bloc.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/RCLS/Cart/cartp_bloc.dart';
 import 'package:secd_ecom/Fortend/CusField/Buttons_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Image_C.dart';
@@ -30,23 +31,27 @@ class _CartScrState extends State<CartScr> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CartpBloc, CartpState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          // print("produc page state: $state");
-          if (state is CartLoadingState) {
-            return Center(child: CircularProgressIndicator());
-          }
-          if (state is CartErrorState) {
-            return Center(child: Text(' this is eror ${state.message}'));
-          }
-          if (state is CartLoadedState) {
-            return CartScrOne(cartData: state.cartData);
-          }
-          return Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
-        });
+    return BlocConsumer<CartpBloc, CartpState>(listener: (context, state) {
+      if (state is ItemDeletingCartState) {
+        Navigator.of(context).pushReplacementNamed(CartScr.routeName);
+      }
+    }, builder: (context, state) {
+      // print("produc page state: $state");
+      if (state is CartLoadingState) {
+        return Center(child: CircularProgressIndicator());
+      }
+      if (state is CartErrorState) {
+        return Center(child: Text(' this is eror ${state.message}'));
+      }
+      if (state is CartLoadedState) {
+        return CartScrOne(cartData: state.cartData);
+      }
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    });
   }
 }
 
@@ -69,21 +74,23 @@ class CartScrOne extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(titleName: 'Cart'),
       body: SafeArea(
-          child: Container(
-              child: Column(children: <Widget>[
-        // ! LISTVIEW BUIDER
-        Flexible(
-          child: ListView.builder(
-              itemCount: cartData.length,
-              itemBuilder: (context, index) {
-                // print(index);
-                return CartListScr(cartNumber: cartData[index]);
-                // return CartListScr(cartNumber: cartData[index]);
-              }),
-        ),
-        // ! CHECKOUT BTN
-        CartCheckBtn()
-      ]))),
+          child: cartData.isNotEmpty
+              ? Container(
+                  child: Column(children: <Widget>[
+                  // ! LISTVIEW BUIDER
+                  Flexible(
+                    child: ListView.builder(
+                        itemCount: cartData.length,
+                        itemBuilder: (context, index) {
+                          // print(index);
+                          return CartListScr(cartNumber: cartData[index]);
+                          // return CartListScr(cartNumber: cartData[index]);
+                        }),
+                  ),
+                  // ! CHECKOUT BTN
+                  CartCheckBtn()
+                ]))
+              : Center(child: Text('No product in Cart'))),
     );
   }
 }
@@ -181,7 +188,16 @@ class CartListScr extends StatelessWidget {
                         child: TxtTitle(cartNumber.product.title),
                       ),
                       // ! 2.1.1
-                      IconBtn(Icons.delete),
+                      IconBtn(Icons.delete, submitMethod: () {
+                        // ! CART ITEM DELETE
+                        BlocProvider.of<CartpBloc>(context)
+                          ..add(ItemDeleteCartEvent(
+                              product_id: cartNumber.product.id.toString()));
+                        // BlocProvider.of<ProdwithcartBloc>(context)
+                        //   ..add(ProdDeleteCartEvent(
+                        //       product_id: cartNumber.product.id.toString()));
+                        // ! END CART ITEM METHOD
+                      }),
                     ],
                   ),
                   // ! 2.2 data

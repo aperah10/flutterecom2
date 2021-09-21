@@ -60,7 +60,7 @@ class CartDataRespo {
     print('this is qunatity,:-$quantity');
     // String Baseurl = 'https://djecoms.herokuapp.com/pm/';
     String baseUrl = 'http://rahulaperah.pythonanywhere.com/pm/';
-    var token = storage.getItem('token');
+    // var token = storage.getItem('token');
     try {
       var res = await http.post(Uri.parse(baseUrl),
           body: json.encode({
@@ -98,10 +98,11 @@ class CartDataRespo {
     required String product_id,
   }) async {
     print('product id $product_id');
-    String Baseurl = 'https://djecoms.herokuapp.com/delcart/';
+    // String Baseurl = 'https://djecoms.herokuapp.com/delcart/';
+    String baseUrl = 'http://rahulaperah.pythonanywhere.com/delcart/';
     var token = storage.getItem('token');
     try {
-      var res = await http.post(Uri.parse(Baseurl),
+      var res = await http.post(Uri.parse(baseUrl),
           body: json.encode({
             'product': product_id,
           }),

@@ -28,6 +28,11 @@ class ItemAddedCartEvent extends CartpEvent {
 
 class ItemDeleteCartEvent extends CartpEvent {
   // List<ShopItem> cartItems;
-  // int index;
+
   // ItemDeleteCartEvent({this.cartItems, this.index});
+  final String product_id;
+
+  ItemDeleteCartEvent({required this.product_id});
+  @override
+  List<Object> get props => [product_id];
 }

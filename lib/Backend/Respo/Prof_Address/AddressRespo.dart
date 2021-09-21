@@ -109,16 +109,16 @@ class AddressDataRespo {
   // /*                         // ! UPDATE ADDRESS METHOD                         */
   // /* -------------------------------------------------------------------------- */
   Future<List<Address>> upAddressData({
-    required String id,
-    required String fullname,
+    String? id,
+    String? fullname,
     String? email,
-    required String phone,
+    String? phone,
     String? house,
     String? trade,
-    required String area,
-    required String city,
-    required String pinCode,
-    required String state,
+    String? area,
+    String? city,
+    String? pinCode,
+    String? state,
     String? delTime,
   }) async {
     // String baseurl = 'https://djecoms.herokuapp.com/address/';
@@ -127,6 +127,7 @@ class AddressDataRespo {
     try {
       var res = await http.put(Uri.parse(baseUrl),
           body: json.encode({
+            "id": id,
             "fullname": fullname,
             "email": email,
             "phone": phone,

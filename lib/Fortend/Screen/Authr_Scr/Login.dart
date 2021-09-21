@@ -133,7 +133,7 @@ class _LoginFormState extends State<LoginForm> {
               placeholder: 'Password',
               controller: passwordController,
               inputType: TextInputType.visiblePassword,
-              formValidator: (String? val) => formvalid.passwordValidator(val)),
+              formValidator: (String? val) => formvalid.reqValid(val)),
 
           /* -------------------------------------------------------------------------- */
           /*                              FORGETEN PASSWORD                             */

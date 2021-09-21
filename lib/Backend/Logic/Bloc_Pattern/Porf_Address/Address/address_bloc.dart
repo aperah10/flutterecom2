@@ -41,7 +41,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     /*                  // ! Address ADDED , ADDING  , DELETING BLOC                 */
     /* -------------------------------------------------------------------------- */
     if (event is AddressSaveButtonEvent) {
-      //   // print('ProdAddedCartEvent Happend');
+      // print('Address Save button  Happend');
       List<Address> addrList = await addRespo.addAddressData(
           fullname: event.fullname,
           email: event.email,
@@ -54,7 +54,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
           delTime: event.delTime,
           state: event.state);
 
-      // print('RESULT  OF ADDTOCART :- $prodList');
+      // print('ADDRESS DATA :- $addrList');
       yield AddressSuccessState();
     }
 
@@ -62,7 +62,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     /*                  // ! Address UPDATE  , DELETING BLOC                 */
     /* -------------------------------------------------------------------------- */
     if (event is AddressUpBtnEvent) {
-      //   // print('ProdAddedCartEvent Happend');
+      // print('Address update tEvent Happend');
       List<Address> adrList = await addRespo.upAddressData(
           id: event.id,
           fullname: event.fullname,
@@ -76,7 +76,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
           delTime: event.delTime,
           state: event.state);
 
-      print('RESULT  OF address update  :- $adrList');
+      // print(adrList.);
       yield AddressSuccessState();
     }
   }

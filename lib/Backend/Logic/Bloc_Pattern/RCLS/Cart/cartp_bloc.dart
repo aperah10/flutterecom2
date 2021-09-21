@@ -34,5 +34,17 @@ class CartpBloc extends Bloc<CartpEvent, CartpState> {
         yield CartErrorState(message: e.toString());
       }
     }
+
+    /* -------------------------------------------------------------------------- */
+    /*                           // ! CART ITEM DELTING                           */
+    /* -------------------------------------------------------------------------- */
+    if (event is ItemDeleteCartEvent) {
+      print('ProdDeleteCartEvent Happend');
+      List<NewCart> prodList = await cartRespo.delCartData(
+        product_id: event.product_id,
+      );
+      print('RESULT  OF ADDTOCART :- $prodList');
+      yield ItemDeletingCartState(cartItems: prodList);
+    }
   }
 }

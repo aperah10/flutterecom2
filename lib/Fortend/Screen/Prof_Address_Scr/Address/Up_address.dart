@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:secd_ecom/Afile/ListFile/StateList.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Porf_Address/Address/address_bloc.dart';
 import 'package:secd_ecom/Fortend/CusField/Buttons_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Drop_Down_C.dart';
+import 'package:secd_ecom/Fortend/CusField/Form/formValdation.dart';
 import 'package:secd_ecom/Fortend/CusField/FormF.dart';
 import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 
@@ -54,48 +56,6 @@ class AddressUpScr extends StatelessWidget {
 // /*                                 // !  LOGIC                                */
 // /* -------------------------------------------------------------------------- */
 
-// /* -------------------------------------------------------------------------- */
-// /*                              // ! ADDRESS SHOW                             */
-// /* -------------------------------------------------------------------------- */
-// class UpAddress2 extends StatelessWidget {
-//   dynamic adrState;
-//   UpAddress2({Key? key, this.adrState}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SingleChildScrollView(
-//         // padding:
-//         //     EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
-//         child: Column(
-//       mainAxisAlignment: MainAxisAlignment.start,
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         // ! Conatiner for listview builder
-//         Container(
-//           child: ListView.builder(
-//               shrinkWrap: true,
-//               itemCount: adrState.length,
-//               // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//               //   crossAxisCount: 1,
-//               //   // childAspectRatio: 0.60,
-//               //   // crossAxisSpacing: 20,
-//               //   //   mainAxisSpacing: 20
-//               // ),
-//               // padding: EdgeInsets.symmetric(horizontal: 20.0),
-//               itemBuilder: (context, index) {
-//                 // print(cartState.length);
-
-//                 return UpAddressScreen(
-//                     adrNumber: adrState[index], adrState: adrState);
-//               }),
-//         )
-
-//         // // ! Address field DATA
-//       ],
-//     ));
-//   }
-// }
-
 class UpAddressScreen extends StatefulWidget {
   dynamic adrNumber;
   dynamic adrState;
@@ -117,20 +77,20 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
   final stateController = TextEditingController();
   final delTimeController = TextEditingController();
 
-  dynamic nameSaved;
-  dynamic emailSaved;
-  dynamic phoneSaved;
-  dynamic houseSaved;
-  dynamic tradeSaved;
-  dynamic areaSaved;
-  dynamic citySaved;
-  dynamic stateSaved;
-  dynamic pinCodeSaved;
-  dynamic delTimeSaved;
+  // dynamic nameSaved;
+  // dynamic emailSaved;
+  // dynamic phoneSaved;
+  // dynamic houseSaved;
+  // dynamic tradeSaved;
+  // dynamic areaSaved;
+  // dynamic citySaved;
+  // dynamic stateSaved;
+  // dynamic pinCodeSaved;
+  // dynamic delTimeSaved;
   /* -------------------------------------------------------------------------- */
   /*                              // ! Address BUTTON                             */
   /* -------------------------------------------------------------------------- */
-  _addressBtn() async {
+  _upaddressBtn() async {
     var isvalid = _form.currentState!.validate();
     if (!isvalid) {
       return "Enter the Correct Value";
@@ -183,22 +143,22 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
     // print('updte address data $areaController ');
     // print('updte address data $cityController ');
     // print('updte address data $pinCodeController ');
-    print(stateController.text.isEmpty ? " yes empty" : 'no empty ');
-    print(delTimeController.text.isNotEmpty ? " not empty" : 'yes empty ');
-    print('updte Vlaue ${stateController.value}');
-    print('updte Vlaue ${delTimeController.value} ');
+    // print(stateController.text.isEmpty ? " yes empty" : 'no empty ');
+    // print(delTimeController.text.isNotEmpty ? " not empty" : 'yes empty ');
+    // print('updte Vlaue ${stateController.value}');
+    // print('updte Vlaue ${delTimeController.value} ');
 
-    print('------------------------------------------------------');
-    print('already data  ${widget.adrNumber.id} ');
-    print('already data ${widget.adrNumber.fullname} ');
-    print(' phone ${widget.adrNumber.phone} ');
-    print('house ${widget.adrNumber.house} ');
-    print('trade ${widget.adrNumber.trade} ');
-    print('area ${widget.adrNumber.area} ');
-    print('city ${widget.adrNumber.city} ');
-    print('pinCode ${widget.adrNumber.pinCode} ');
-    print('state ${widget.adrNumber.state} ');
-    print('delTime ${widget.adrNumber.delTime} ');
+    // print('------------------------------------------------------');
+    // print('already data  ${widget.adrNumber.id} ');
+    // print('already data ${widget.adrNumber.fullname} ');
+    // print(' phone ${widget.adrNumber.phone} ');
+    // print('house ${widget.adrNumber.house} ');
+    // print('trade ${widget.adrNumber.trade} ');
+    // print('area ${widget.adrNumber.area} ');
+    // print('city ${widget.adrNumber.city} ');
+    // print('pinCode ${widget.adrNumber.pinCode} ');
+    // print('state ${widget.adrNumber.state} ');
+    // print('delTime ${widget.adrNumber.delTime} ');
   }
 
   /* -------------------------------------------------------------------------- */
@@ -207,6 +167,11 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
+    /* -------------------------------------------------------------------------- */
+    /*                       //  ! FORM VALIDATION PROVIDER                       */
+    /* -------------------------------------------------------------------------- */
+    final formvalid = Provider.of<AllFormValdation>(context);
+
     return SingleChildScrollView(
       child: Container(
         child: Padding(
@@ -218,6 +183,7 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
               children: <Widget>[
                 // ! Name ProfFieldForms
                 ProfFieldForms(
+                  formValidator: (String? val) => formvalid.reqValid(val),
                   inValue: widget.adrNumber.fullname.toString().isNotEmpty
                       ? widget.adrNumber.fullname
                       : '',
@@ -235,6 +201,8 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
                 ),
                 // ! PHONE field
                 ProfFieldForms(
+                  formValidator: (String? val) =>
+                      formvalid.mobileValidator(val),
                   inValue: widget.adrNumber.phone.toString().isNotEmpty
                       ? widget.adrNumber.phone
                       : '',
@@ -253,6 +221,7 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
 
                 // ! Email field
                 ProfFieldForms(
+                  formValidator: (String? val) => formvalid.emailVal2(val),
                   placeholder: 'Email',
                   inputType: TextInputType.emailAddress,
                   // controller: emailController,
@@ -306,6 +275,7 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
 
                 // ! City field
                 ProfFieldForms(
+                  formValidator: (String? val) => formvalid.reqValid(val),
                   inputType: TextInputType.name,
                   placeholder: 'City',
                   // controller: cityController,
@@ -342,6 +312,8 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
 
                 // ! POSTTAL field
                 ProfFieldForms(
+                  formValidator: (String? val) =>
+                      formvalid.postalCodeValid(val),
                   inputType: TextInputType.number,
                   placeholder: 'PostalCode',
                   // controller: pinCodeController,
@@ -360,6 +332,7 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
 
                 // ! DROP DOWN FOR STATE_LIST
                 DropDownBtn(
+                  formValidator: (String? val) => formvalid.reqValid(val),
                   pageName: 'State',
                   dName: widget.adrNumber.state.toString().isNotEmpty
                       ? widget.adrNumber.state
@@ -391,7 +364,7 @@ class _UpAddressScreenState extends State<UpAddressScreen> {
                       ? CupertinoActivityIndicator()
                       : SingleBtn(
                           btnName: 'Save',
-                          submitMethod: _addressBtn,
+                          submitMethod: _upaddressBtn,
                         ),
                 ),
               ],

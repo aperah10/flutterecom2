@@ -38,13 +38,14 @@ class DropDownBtn extends StatefulWidget {
   // final ValueChanged<String>? itemCallBack;
 
   TextEditingController? listController = new TextEditingController();
-
+  String? Function(String?)? formValidator;
   DropDownBtn(
       {Key? key,
       this.dName,
       this.listData,
       this.listController,
       this.pageName = 'Item',
+      this.formValidator,
       // this.onValue,
       // this.itemCallBack,
       this.currentItem})
@@ -60,20 +61,16 @@ class _DropDownBtnState extends State<DropDownBtn> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: DropdownButton<String>(
+      child: DropdownButtonFormField<String>(
         // ! DROP DOWN MENU dropdownValue
         // value: dropdownValue,
         value: widget.currentItem,
-
+        validator: widget.formValidator,
         isExpanded: true,
         icon: const Icon(Icons.arrow_downward),
         iconSize: 24,
         elevation: 16,
         style: const TextStyle(color: Colors.deepPurple),
-        underline: Container(
-          height: 2,
-          color: Colors.deepPurpleAccent,
-        ),
 
         onChanged: (String? newValue) {
           setState(() {

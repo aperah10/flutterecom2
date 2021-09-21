@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:secd_ecom/Afile/ListFile/StateList.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Porf_Address/Address/address_bloc.dart';
 import 'package:secd_ecom/Fortend/CusField/Buttons_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Drop_Down_C.dart';
+import 'package:secd_ecom/Fortend/CusField/Form/formValdation.dart';
 import 'package:secd_ecom/Fortend/CusField/FormF.dart';
 import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 
@@ -110,10 +112,15 @@ class _CreateAddressScreenState extends State<CreateAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
+    /* -------------------------------------------------------------------------- */
+    /*                       //  ! FORM VALIDATION PROVIDER                       */
+    /* -------------------------------------------------------------------------- */
+    final formvalid = Provider.of<AllFormValdation>(context);
+
     return SingleChildScrollView(
         child: Container(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(3.0),
         child: Form(
           key: _form,
           child: Column(
@@ -121,12 +128,14 @@ class _CreateAddressScreenState extends State<CreateAddressScreen> {
             children: <Widget>[
               // ! Name FieldForms
               FieldForms(
+                formValidator: (String? val) => formvalid.reqValid(val),
                 placeholder: 'Name',
                 inputType: TextInputType.name,
                 controller: nameController,
               ),
               // ! PHONE field
               FieldForms(
+                formValidator: (String? val) => formvalid.mobileValidator(val),
                 placeholder: 'Phone',
                 inputType: TextInputType.phone,
                 controller: phoneController,
@@ -134,6 +143,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen> {
 
               // ! Email field
               FieldForms(
+                formValidator: (String? val) => formvalid.emailVal2(val),
                 placeholder: 'Email',
                 inputType: TextInputType.emailAddress,
                 controller: emailController,
@@ -152,6 +162,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen> {
 
               // ! City field
               FieldForms(
+                  formValidator: (String? val) => formvalid.reqValid(val),
                   inputType: TextInputType.name,
                   placeholder: 'City',
                   controller: cityController),
@@ -165,6 +176,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen> {
 
               // ! POSTTAL field
               FieldForms(
+                formValidator: (String? val) => formvalid.postalCodeValid(val),
                 inputType: TextInputType.number,
                 placeholder: 'PostalCode',
                 controller: pinCodeController,
@@ -172,6 +184,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen> {
 
               // ! DROP DOWN FOR STATE_LIST
               DropDownBtn(
+                formValidator: (String? val) => formvalid.reqValid(val),
                 dName: 'State',
                 listData: AllListData.stateData,
                 listController: stateController,

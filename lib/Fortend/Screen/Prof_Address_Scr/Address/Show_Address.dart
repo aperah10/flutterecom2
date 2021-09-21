@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Porf_Address/Address/address_bloc.dart';
+import 'package:secd_ecom/Fortend/CusField/Iocns_C.dart';
 import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 
 import 'Create_Address.dart';
@@ -64,7 +65,6 @@ class _Address1State extends State<Address1> {
         // }
       },
       child: BlocBuilder<AddressBloc, AddressState>(builder: (context, state) {
-        print('this is builder ${state}');
         if (state is AddressLoadedState) {
           // print(state.addressData);
           return AddressShow(adrState: state.addressData);
@@ -169,22 +169,39 @@ class AddressGridListShow extends StatelessWidget {
             // ! END PRODUCT PIC
             ListTile(
                 onTap: () {},
-                trailing: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                // ! add PRODUCT ITEM DEIALS
-                                AddressUpScr(
-                                  adrNumber: adrNumber,
-                                  adrState: adrState,
-                                )));
-                  },
-                  child: Text(
-                    'Edit Address',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                trailing: Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    // ! add PRODUCT ITEM DEIALS
+                                    AddressUpScr(
+                                      adrNumber: adrNumber,
+                                      adrState: adrState,
+                                    )));
+                      },
+                      child: Text(
+                        'Edit Address',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+
+                    // ! REMOVE ICON listvie builder
+                    // ! 2.1.1
+                    IconBtn(Icons.delete, submitMethod: () {
+                      // // ! CART ITEM DELETE
+                      //                       BlocProvider.of<ProdwithcartBloc>(
+                      //                           context)
+                      //                         ..add(ProdDeleteCartEvent(
+                      //                             product_id: state
+                      //                                 .productData[0].id
+                      //                                 .toString()));
+                      //                       // ! END CART ITEM METHOD
+                    }),
+                  ],
                 ),
                 title: Text(
                   adrNumber.fullname,
