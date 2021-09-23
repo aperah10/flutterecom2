@@ -67,9 +67,9 @@ class ProductDetailOne extends StatelessWidget {
           TxtContent(
             prodNumber.discountPrice.toString(),
           ),
-          // ! 2.1 DROPDOWN_MENU_ITEM
+          // // ! 2.1 DROPDOWN_MENU_ITEM
           TxtTitle('Varitaion'),
-          DropDownBtn(),
+          // DropDownBtn(),
 
           // ! 3.  DESCRIPTION
           TxtTitle("Description"),
@@ -105,7 +105,7 @@ class ProductDetailOne extends StatelessWidget {
                       false) {
                     BlocProvider.of<ProdwithcartBloc>(context)
                       ..add(ProdAddedCartEvent(
-                          product_id: prodNumber.id, quantity: 100));
+                          product_id: prodNumber.id, quantity: 1));
                   } // ! PRODUCT  EXIST IN CART
                   else {
                     Navigator.of(context)

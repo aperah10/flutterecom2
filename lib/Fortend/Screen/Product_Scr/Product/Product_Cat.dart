@@ -204,7 +204,7 @@ class ProdGridListShow extends StatelessWidget {
                         false) {
                       BlocProvider.of<ProdwithcartBloc>(context)
                         ..add(ProdAddedCartEvent(
-                            product_id: prodNumber.id, quantity: 100));
+                            product_id: prodNumber.id, quantity: 1));
                     } // ! PRODUCT  EXIST IN CART
                     else {
                       Navigator.of(context)

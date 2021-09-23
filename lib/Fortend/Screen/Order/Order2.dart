@@ -14,7 +14,7 @@ class _MyOrderScreenState extends State<MyOrdersScreen> {
             "id": index,
             "title": "mmm",
             "price": 50,
-          }).toList();
+          });
 
   Widget build(BuildContext context) {
     return Scaffold(

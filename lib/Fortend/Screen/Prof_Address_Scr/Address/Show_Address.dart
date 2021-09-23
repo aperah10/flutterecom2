@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Porf_Address/Address/address_bloc.dart';
 import 'package:secd_ecom/Fortend/CusField/Iocns_C.dart';
+import 'package:secd_ecom/Fortend/Screen/Order/MyOrder/orderWidget.dart';
 import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 
 import 'Create_Address.dart';
@@ -81,10 +82,26 @@ class _Address1State extends State<Address1> {
 
 /* -------------------------------------------------------------------------- */
 /*                              // ! ADDRESS SHOW                             */
-/* -------------------------------------------------------------------------- */
-class AddressShow extends StatelessWidget {
+// /* -------------------------------------------------------------------------- */
+
+class AddressShow extends StatefulWidget {
   dynamic adrState;
+
   AddressShow({Key? key, this.adrState}) : super(key: key);
+
+  @override
+  _AddressShowState createState() => _AddressShowState();
+}
+
+class _AddressShowState extends State<AddressShow> {
+  dynamic gValue = 0;
+  dynamic idt;
+
+  @override
+  void initState() {
+    idt = widget.adrState[0].id;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,32 +135,131 @@ class AddressShow extends StatelessWidget {
             )),
 
         // ! Conatiner for listview builder
-        Container(
-          child: GridView.builder(
-              shrinkWrap: true,
-              itemCount: adrState.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                // childAspectRatio: 0.60,
-                // crossAxisSpacing: 20,
-                //   mainAxisSpacing: 20
-              ),
-              // padding: EdgeInsets.symmetric(horizontal: 20.0),
-              itemBuilder: (context, index) {
-                // print(cartState.length);
-
-                return AddressGridListShow(
-                  adrNumber: adrState[index],
-                  adrState: adrState,
-                );
-              }),
-        )
+        widget.adrState.isNotEmpty
+            ? Container(
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: widget.adrState.length,
+                    itemBuilder: (context, index) {
+                      return RadioListTile(
+                        value: index,
+                        groupValue: gValue,
+                        onChanged: (ind) {
+                          setState(() {
+                            gValue = ind;
+                            idt = widget.adrState[index].id;
+                            print('idt :- ${idt}');
+                          });
+                        },
+                        title: AddressDataM(adrNumber: widget.adrState[index]),
+                      );
+                    }),
+              )
+            : Center(
+                child: Text('No Address'),
+              )
 
         // // ! Address field DATA
       ],
     ));
   }
 }
+
+class AddressDataM extends StatelessWidget {
+  dynamic adrNumber;
+
+  AddressDataM({Key? key, this.adrNumber}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // ! fullname
+        Text(
+          adrNumber.fullname != null ? adrNumber.fullname : 'Fullname',
+          // title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Text(adrNumber.phone != null ? adrNumber.phone : 'Phone'),
+        Text(adrNumber.house != null ? adrNumber.house : 'house number'),
+        Text(adrNumber.trade != null ? adrNumber.trade : 'Trade'),
+        Text(adrNumber.city != null ? adrNumber.city : 'City'),
+        Text(adrNumber.pinCode != null ? adrNumber.pinCode : 'PostalCode'),
+        Text(adrNumber.state != null ? adrNumber.state : 'State'),
+        Text(adrNumber.delTime != null ? adrNumber.delTime : 'DelTime'),
+      ],
+    ));
+  }
+}
+
+// class AddressShow extends StatelessWidget {
+//   dynamic adrState;
+//   dynamic gValue;
+//   AddressShow({Key? key, this.adrState}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return SingleChildScrollView(
+//         // padding:
+//         //     EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
+//         child: Column(
+//       mainAxisAlignment: MainAxisAlignment.start,
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         // ! Address Header
+//         Container(
+//             color: Colors.grey.shade200,
+//             padding: EdgeInsets.all(8.0),
+//             width: double.infinity,
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//                 Text("Delivery Address".toUpperCase()),
+//                 InkWell(
+//                   onTap: () {
+//                     Navigator.of(context)
+//                         .pushReplacementNamed(AddressPostScr.routeName);
+//                   },
+//                   child: Text(
+//                     'Add',
+//                     style: TextStyle(fontWeight: FontWeight.bold),
+//                   ),
+//                 )
+//               ],
+//             )),
+
+//         // ! Conatiner for listview builder
+//         adrState.isNotEmpty
+//             ? Container(
+//                 child: ListView.builder(
+//                     shrinkWrap: true,
+//                     itemCount: adrState.length,
+
+//                     itemBuilder: (context, index) {
+//                       // print(cartState.length);
+
+//                       // return AddressGridListShow(
+//                       //   adrNumber: adrState[index],
+//                       //   adrState: adrState,
+//                       // );
+//                       return AddressRadBtn(
+//                         adrNumber: adrState[index],
+//                         ind: index,
+//                         gValue: gValue,
+//                       );
+//                     }),
+//               )
+//             : Center(
+//                 child: Text('No Address'),
+//               )
+
+//         // // ! Address field DATA
+//       ],
+//     ));
+//   }
+// }
 
 /* -------------------------------------------------------------------------- */
 /*                         // ! ADDRESS GRID LIST VIEW                        */
@@ -177,7 +293,7 @@ class AddressGridListShow extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    // ! add PRODUCT ITEM DEIALS
+                                    // ! ADDRESS UPDATE Screen
                                     AddressUpScr(
                                       adrNumber: adrNumber,
                                       adrState: adrState,

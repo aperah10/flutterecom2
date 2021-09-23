@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:secd_ecom/Fortend/CusField/Aviatar_Pic.dart';
+import 'package:secd_ecom/Fortend/Screen/Order/MyOrder/CurrentOrder.dart';
+import 'package:secd_ecom/Fortend/Screen/Order/MyOrder/orderPage.dart';
+import 'package:secd_ecom/Fortend/Screen/Order/MyOrder/orderWidget.dart';
 import 'package:secd_ecom/Fortend/Screen/Order/Order2.dart';
 import 'package:secd_ecom/Fortend/Screen/Order/Order_Scr.dart';
 import 'package:secd_ecom/Fortend/Screen/Order/Payment.dart';
@@ -43,6 +46,20 @@ class _MyDrawerListState extends State<MyDrawerList> {
             title: 'AddressShow',
             icon: Icons.photo,
             createPage: () => AddressShowScr()),
+        CusDrawerList(
+            title: 'MyOrder',
+            icon: Icons.photo,
+            createPage: () => MyOrderPage()),
+        CusDrawerList(
+            title: 'CurrentOrder',
+            icon: Icons.photo,
+            createPage: () => CurrentOrderPage()),
+        CusDrawerList(
+            title: 'OrderAddressPage',
+            icon: Icons.photo,
+            createPage: () => OrderAddressPage()),
+        CusDrawerList(
+            title: 'Steeper', icon: Icons.photo, createPage: () => SteprBtn()),
         // CusDrawerList(
         //     title: ' Cart',
         //     icon: Icons.shopping_bag,
@@ -60,10 +77,10 @@ class _MyDrawerListState extends State<MyDrawerList> {
         //     title: 'ProfileEdit',
         //     icon: Icons.photo,
         //     createPage: () => ProfileEditScr()),
-        CusDrawerList(
-            title: 'ProfileShow',
-            icon: Icons.photo,
-            createPage: () => ProfileShowScr()),
+        // CusDrawerList(
+        //     title: 'ProfileShow',
+        //     icon: Icons.photo,
+        //     createPage: () => ProfileShowScr()),
 
         // CusDrawerList(
         //     title: ' Order Page',
