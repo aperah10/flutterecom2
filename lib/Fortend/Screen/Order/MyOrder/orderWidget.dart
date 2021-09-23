@@ -46,21 +46,23 @@ class OrderAddressPage extends StatelessWidget {
 // ! ORDER PRODUCT_TO_JSON
 
 class OrderProductPage extends StatelessWidget {
-  OrderProductPage({Key? key}) : super(key: key);
+  dynamic prodNumber;
+
+  OrderProductPage({Key? key, this.prodNumber}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.grey.shade200,
-        padding: EdgeInsets.all(8.0),
-        height: 300,
-        width: double.infinity,
-        child: Card(
-          child: ListTile(
-            title: Text("ttttt"),
-            trailing: Icon(Icons.more_vert),
-          ),
-        ));
+    return ListTile(
+      title: Text(prodNumber.title),
+      subtitle: Column(
+        children: [
+          Text(prodNumber.discountPrice.toString()),
+          Text(prodNumber.description),
+          Text(prodNumber.id),
+        ],
+      ),
+      trailing: Icon(Icons.more_vert),
+    );
   }
 }
 
@@ -195,24 +197,45 @@ class _SteprBtnState extends State<SteprBtn> {
     return Scaffold(
         body: Container(
       child: Stepper(
-          type: StepperType.horizontal,
-          physics: ScrollPhysics(),
-          currentStep: curStep,
-          onStepCancel: () {
-            setState(() => curStep -= 1);
-          },
-          onStepContinue: () {
-            final isLastStep = curStep == getSteps().length - 1;
+        type: StepperType.horizontal,
+        physics: ScrollPhysics(),
+        currentStep: curStep,
+        onStepCancel: () {
+          curStep == 0 ? null : setState(() => curStep -= 1);
+        },
+        onStepContinue: () {
+          final isLastStep = curStep == getSteps().length - 1;
 
+          if (isLastStep) {
+            print('its complete ');
+          } else {
             setState(() => curStep += 1);
-          },
-          onStepTapped: (step) {},
-          steps: getSteps()),
+          }
+        },
+        onStepTapped: (step) => setState(() => curStep = step),
+        steps: getSteps(),
+        controlsBuilder: (BuildContext context,
+            {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
+          return Row(
+            children: <Widget>[
+              TextButton(
+                onPressed: onStepContinue,
+                child: const Text('NEXT'),
+              ),
+              TextButton(
+                onPressed: onStepCancel,
+                child: const Text('CANCEL'),
+              ),
+            ],
+          );
+        },
+      ),
     ));
   }
 
   getSteps() => [
         Step(
+          state: curStep > 0 ? StepState.complete : StepState.indexed,
           isActive: curStep >= 0,
           title: const Text('Account'),
           content: Container(
@@ -220,6 +243,7 @@ class _SteprBtnState extends State<SteprBtn> {
               child: const Text('cpntent for Step 1')),
         ),
         Step(
+          state: curStep > 1 ? StepState.complete : StepState.indexed,
           isActive: curStep >= 1,
           title: const Text('Address'),
           content: Container(
@@ -227,6 +251,7 @@ class _SteprBtnState extends State<SteprBtn> {
               child: const Text('Content for Step 2')),
         ),
         Step(
+          state: curStep > 2 ? StepState.complete : StepState.indexed,
           isActive: curStep >= 2,
           title: const Text('Complete'),
           content: Container(

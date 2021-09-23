@@ -4,6 +4,7 @@ import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Product/ProdwithCart/prodwi
 import 'package:secd_ecom/Backend/Respo/Product/ProdRespo.dart';
 import 'package:secd_ecom/Fortend/CusField/Buttons_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Image_C.dart';
+import 'package:secd_ecom/Fortend/Screen/AMyPage/orderStep.dart';
 import 'package:secd_ecom/Fortend/Screen/Product_Scr/Cart/Cart.dart';
 import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 
@@ -212,7 +213,18 @@ class ProdGridListShow extends StatelessWidget {
                     }
                   },
                 ),
-                MultipleBtn(btnName: 'Buy', submitMethod: () {})
+                MultipleBtn(
+                    btnName: 'Buy',
+                    submitMethod: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  // ! add PRODUCT ITEM DEIALS
+                                  OrderStrp(
+                                      prodNumber: prodNumber,
+                                      cartNumber: cartNumber)));
+                    })
               ],
             )
           ],

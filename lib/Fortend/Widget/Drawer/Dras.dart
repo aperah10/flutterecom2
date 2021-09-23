@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:secd_ecom/Fortend/ACheck/check1.dart';
 import 'package:secd_ecom/Fortend/CusField/Aviatar_Pic.dart';
+import 'package:secd_ecom/Fortend/Screen/AMyPage/orderStep.dart';
 import 'package:secd_ecom/Fortend/Screen/Order/MyOrder/CurrentOrder.dart';
 import 'package:secd_ecom/Fortend/Screen/Order/MyOrder/orderPage.dart';
 import 'package:secd_ecom/Fortend/Screen/Order/MyOrder/orderWidget.dart';
@@ -43,23 +45,27 @@ class _MyDrawerListState extends State<MyDrawerList> {
             createPage: () => ProductGridScr()),
 
         CusDrawerList(
-            title: 'AddressShow',
-            icon: Icons.photo,
-            createPage: () => AddressShowScr()),
-        CusDrawerList(
             title: 'MyOrder',
             icon: Icons.photo,
             createPage: () => MyOrderPage()),
         CusDrawerList(
-            title: 'CurrentOrder',
+            title: 'Order Step',
             icon: Icons.photo,
-            createPage: () => CurrentOrderPage()),
+            createPage: () => OrderStrp()),
+
         CusDrawerList(
-            title: 'OrderAddressPage',
+            title: 'AddressShow',
             icon: Icons.photo,
-            createPage: () => OrderAddressPage()),
-        CusDrawerList(
-            title: 'Steeper', icon: Icons.photo, createPage: () => SteprBtn()),
+            createPage: () => AddressShowScr()),
+        // CusDrawerList(
+        //     title: 'CurrentOrder',
+        //     icon: Icons.photo,
+        //     createPage: () => CurrentOrderPage()),
+        // CusDrawerList(
+        //     title: 'OrderAddressPage',
+        //     icon: Icons.photo,
+        //     createPage: () => OrderAddressPage()),
+
         // CusDrawerList(
         //     title: ' Cart',
         //     icon: Icons.shopping_bag,

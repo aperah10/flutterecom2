@@ -31,13 +31,17 @@ class AddressShowScr extends StatelessWidget {
 /*                              // ! Address BODY                             */
 /* -------------------------------------------------------------------------- */
 class Address1 extends StatefulWidget {
-  Address1({Key? key}) : super(key: key);
+  Address1({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _Address1State createState() => _Address1State();
 }
 
 class _Address1State extends State<Address1> {
+  dynamic idtData;
+
   // ! Address instance
   //  ProductshowBloc prodBloc = ProductshowBloc(prodRespo: ProductDataRespo());
   AddressBloc prodBloc = AddressBloc();
@@ -49,12 +53,18 @@ class _Address1State extends State<Address1> {
     super.initState();
   }
 
+  //  !   callback method for data
+  callback(newAbc) {
+    setState(() {
+      idtData = newAbc;
+      print('this is idtData in parent class ${idtData}');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<AddressBloc, AddressState>(
       listener: (context, state) {
-        // print('this is listner ${state}');
-
         if (state is AddressLoadingState) {
           Center(child: CircularProgressIndicator());
         }
@@ -68,7 +78,7 @@ class _Address1State extends State<Address1> {
       child: BlocBuilder<AddressBloc, AddressState>(builder: (context, state) {
         if (state is AddressLoadedState) {
           // print(state.addressData);
-          return AddressShow(adrState: state.addressData);
+          return AddressShow(adrState: state.addressData, callback: callback);
         }
         // if (state is AddressLoadedState) {
         //   Center(child: Text('${state.AddressData}'));
@@ -86,8 +96,9 @@ class _Address1State extends State<Address1> {
 
 class AddressShow extends StatefulWidget {
   dynamic adrState;
+  Function(String)? callback;
 
-  AddressShow({Key? key, this.adrState}) : super(key: key);
+  AddressShow({Key? key, this.adrState, this.callback}) : super(key: key);
 
   @override
   _AddressShowState createState() => _AddressShowState();
@@ -100,6 +111,7 @@ class _AddressShowState extends State<AddressShow> {
   @override
   void initState() {
     idt = widget.adrState[0].id;
+
     super.initState();
   }
 
@@ -148,7 +160,8 @@ class _AddressShowState extends State<AddressShow> {
                           setState(() {
                             gValue = ind;
                             idt = widget.adrState[index].id;
-                            print('idt :- ${idt}');
+                            // print('idt :- ${idt}');
+                            widget.callback!(idt);
                           });
                         },
                         title: AddressDataM(adrNumber: widget.adrState[index]),

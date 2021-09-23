@@ -27,7 +27,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         List<Address> addressData = await addRespo.getAddressData();
 
         // print('-----------------------------------------------------------');
-        print('profData:- $addressData ');
+        // print('profData:- $addressData ');
         // print('cartData:- $cartData ');
         yield AddressLoadedState(
           addressData: addressData,
