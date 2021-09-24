@@ -19,7 +19,8 @@ class CartLoadingState extends CartpState {
 
 class CartLoadedState extends CartpState {
   List<NewCart> cartData;
-  CartLoadedState({required this.cartData});
+  List<Address> addressData;
+  CartLoadedState({required this.cartData, required this.addressData});
 
   @override
   List<Object> get props => [];

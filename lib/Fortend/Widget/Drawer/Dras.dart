@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:secd_ecom/Fortend/ACheck/check1.dart';
 import 'package:secd_ecom/Fortend/CusField/Aviatar_Pic.dart';
+import 'package:secd_ecom/Fortend/Screen/AMyPage/OrderStep2.dart';
+import 'package:secd_ecom/Fortend/Screen/AMyPage/OrderWidget/ProductOrder.dart';
 import 'package:secd_ecom/Fortend/Screen/AMyPage/orderStep.dart';
 import 'package:secd_ecom/Fortend/Screen/Order/MyOrder/CurrentOrder.dart';
 import 'package:secd_ecom/Fortend/Screen/Order/MyOrder/orderPage.dart';
@@ -49,9 +51,13 @@ class _MyDrawerListState extends State<MyDrawerList> {
             icon: Icons.photo,
             createPage: () => MyOrderPage()),
         CusDrawerList(
-            title: 'Order Step',
+            title: 'Order with cP',
             icon: Icons.photo,
-            createPage: () => OrderStrp()),
+            createPage: () => OrderwithCP()),
+        // CusDrawerList(
+        //     title: 'Order Step 2',
+        //     icon: Icons.photo,
+        //     createPage: () => OrderStrp2()),
 
         CusDrawerList(
             title: 'AddressShow',

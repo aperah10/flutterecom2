@@ -112,25 +112,23 @@ class _OrderStrpState extends State<OrderStrp> {
               Step(
                 state: curStep > 1 ? StepState.complete : StepState.indexed,
                 isActive: curStep >= 1,
-                title: const Text('Product'),
-                subtitle: const Text('Quantity'),
+                title: const Text('Order'),
+                subtitle: const Text('Delivery'),
                 content: Container(
-                  child: Card(
-                    child: Column(
-                      children: [
-                        Text('Quantity'),
-                        OrderProductPage(
-                          prodNumber: widget.prodNumber,
-                        ),
-                      ],
-                    ),
+                  child: Column(
+                    children: [
+                      Text('Quantity'),
+                      OrderProductPage(
+                        prodNumber: widget.prodNumber,
+                      ),
+                    ],
                   ),
                 ),
               ),
               Step(
                 state: curStep > 2 ? StepState.complete : StepState.indexed,
                 isActive: curStep >= 2,
-                title: const Text('Complete'),
+                title: const Text('Payment'),
                 content: Container(
                     alignment: Alignment.centerLeft,
                     child: const Text('Content for Step 3')),

@@ -52,16 +52,18 @@ class OrderProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(prodNumber.title),
-      subtitle: Column(
-        children: [
-          Text(prodNumber.discountPrice.toString()),
-          Text(prodNumber.description),
-          Text(prodNumber.id),
-        ],
+    return Card(
+      child: ListTile(
+        title: Text(prodNumber.title),
+        subtitle: Column(
+          children: [
+            Text(prodNumber.discountPrice.toString()),
+            Text(prodNumber.description),
+            Text(prodNumber.id),
+          ],
+        ),
+        trailing: Icon(Icons.more_vert),
       ),
-      trailing: Icon(Icons.more_vert),
     );
   }
 }
