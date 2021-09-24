@@ -59,6 +59,7 @@ class _ProductGridScrState extends State<ProductGridScr> {
         return ProdScrOne(
           cartState: state.cartData,
           prodState: state.productData,
+          adrState: state.addressData,
         );
       }
       return Scaffold(
@@ -74,7 +75,9 @@ class _ProductGridScrState extends State<ProductGridScr> {
 class ProdScrOne extends StatelessWidget {
   dynamic cartState;
   dynamic prodState;
-  ProdScrOne({Key? key, this.prodState, this.cartState}) : super(key: key);
+  dynamic adrState;
+  ProdScrOne({Key? key, this.prodState, this.cartState, this.adrState})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +105,7 @@ class ProdScrOne extends StatelessWidget {
           child: ProdGridList(
             prodState: prodState,
             cartState: cartState,
+            adrState: adrState,
           ),
         ));
   }
@@ -113,7 +117,9 @@ class ProdScrOne extends StatelessWidget {
 class ProdGridList extends StatelessWidget {
   dynamic cartState;
   dynamic prodState;
-  ProdGridList({Key? key, this.prodState, this.cartState}) : super(key: key);
+  dynamic adrState;
+  ProdGridList({Key? key, this.prodState, this.cartState, this.adrState})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -132,9 +138,9 @@ class ProdGridList extends StatelessWidget {
             // print(cartState.length);
 
             return ProdGridListShow(
-              prodNumber: prodState[index],
-              cartNumber: cartState,
-            );
+                prodNumber: prodState[index],
+                cartNumber: cartState,
+                adrNumber: adrState);
           }),
     );
   }
@@ -146,7 +152,8 @@ class ProdGridList extends StatelessWidget {
 class ProdGridListShow extends StatelessWidget {
   dynamic prodNumber;
   List? cartNumber;
-  ProdGridListShow({Key? key, this.prodNumber, this.cartNumber})
+  dynamic adrNumber;
+  ProdGridListShow({Key? key, this.prodNumber, this.cartNumber, this.adrNumber})
       : super(key: key);
 
   // cartFun() {
@@ -223,7 +230,8 @@ class ProdGridListShow extends StatelessWidget {
                                   // ! add PRODUCT ITEM DEIALS
                                   OrderStrp(
                                       prodNumber: prodNumber,
-                                      cartNumber: cartNumber)));
+                                      cartNumber: cartNumber,
+                                      adrNumber: adrNumber)));
                     })
               ],
             )

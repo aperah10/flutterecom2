@@ -5,7 +5,9 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:secd_ecom/Backend/Models/Cart/New_Cartm.dart';
 import 'package:secd_ecom/Backend/Models/Product/New_Product_m.dart';
+import 'package:secd_ecom/Backend/Models/Prof_Address/Addressm.dart';
 import 'package:secd_ecom/Backend/Respo/Product/ProdRespo.dart';
+import 'package:secd_ecom/Backend/Respo/Prof_Address/AddressRespo.dart';
 import 'package:secd_ecom/Backend/Respo/RCLS/Cart/CartRespo.dart';
 
 part 'prodwithcart_event.dart';
@@ -15,6 +17,7 @@ class ProdwithcartBloc extends Bloc<ProdwithcartEvent, ProdwithcartState> {
   // ! Adding Repo for data logic
   CartDataRespo cartRespo = CartDataRespo();
   ProductDataRespo prodRespo = ProductDataRespo();
+  AddressDataRespo addRespo = AddressDataRespo();
 
   ProdwithcartBloc() : super(ProdwithcartInitial());
 
@@ -29,23 +32,25 @@ class ProdwithcartBloc extends Bloc<ProdwithcartEvent, ProdwithcartState> {
       try {
         List<ProductC> productData = await prodRespo.getProduct();
         List<NewCart> cartData = await cartRespo.getCartData();
-
+        List<Address> addressData = await addRespo.getAddressData();
         // print('-----------------------------------------------------------');
         // print(productData.any((e) => e.title!.contains('p1')));
         // print(cartData.any((e) => e.product!.id!.contains('p1')));
         // print(productData.every((e) => e.title!.contains('Mobile')));
         //  ! UNIQU VALUE IN LIST
-        var dup = [];
-        for (var p in productData) {
-          dup.add(p.category!);
-        }
+        // var dup = [];
+        // for (var p in productData) {
+        //   dup.add(p.category!);
+        // }
 
         // print(dup);
-        dup = dup.toSet().toList();
+        // dup = dup.toSet().toList();
         // print(dup);
 
         yield ProductCartLoadedState(
-            productData: productData, cartData: cartData);
+            productData: productData,
+            cartData: cartData,
+            addressData: addressData);
       } catch (e) {
         yield ProductCartErrorState(message: e.toString());
       }

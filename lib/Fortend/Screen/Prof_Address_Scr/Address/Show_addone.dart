@@ -5,8 +5,13 @@ import 'package:secd_ecom/Backend/Logic/Bloc_Pattern/Porf_Address/Address/addres
 import 'Create_Address.dart';
 import 'Show_Address.dart';
 
+/* -------------------------------------------------------------------------- */
+/*                       // ! Child Class for order page                      */
+/* -------------------------------------------------------------------------- */
 class AddressInOne extends StatefulWidget {
-  AddressInOne({Key? key}) : super(key: key);
+  // dynamic callback;
+  Function(String)? callback;
+  AddressInOne({Key? key, this.callback}) : super(key: key);
 
   @override
   _AddressInOneState createState() => _AddressInOneState();
@@ -43,7 +48,6 @@ class _AddressInOneState extends State<AddressInOne> {
         if (state is AddressLoadedState) {
           if (idt == null || idt.toString().isEmpty) {
             idt = state.addressData[0].id;
-            // print('this is idt data  ${idt}');
           }
           return SingleChildScrollView(
               // padding:
@@ -88,8 +92,8 @@ class _AddressInOneState extends State<AddressInOne> {
                                 setState(() {
                                   gValue = ind;
                                   idt = state.addressData[index].id;
-                                  print('idt :- ${idt}');
-                                  // widget.callback!(idt);
+                                  // print('idt :- ${idt}');
+                                  widget.callback!(idt);
                                 });
                               },
                               title: AddressDataM(

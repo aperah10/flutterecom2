@@ -6,7 +6,7 @@ class AllListData {
     "Arunachal Pradesh",
     "Assam",
     "Bihar",
-    "Chhattisgarh ",
+    "Chhattisgarh",
     "Goa",
     "Gujarat",
     "Haryana",
