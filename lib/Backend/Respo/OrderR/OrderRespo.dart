@@ -26,11 +26,11 @@ class OrderDataRespo {
             'Authorization': "token $token"
           });
       var data = json.decode(res.body) as Map;
-      // print(
-      //     '----------------------------------------------------------------------');
-      // print('this is data $data');
-      // print(res.body);
-      // print('CART POST MEHTOD Statuc Code  :-  ${res.statusCode}');
+      print(
+          '----------------------------------------------------------------------');
+      print('this is data $data');
+      print(res.body);
+      print('CART POST MEHTOD Statuc Code  :-  ${res.statusCode}');
 
       if (res.statusCode == 200) {
         return [];

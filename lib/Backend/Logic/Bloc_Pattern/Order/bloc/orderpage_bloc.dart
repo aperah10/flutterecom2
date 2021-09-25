@@ -32,5 +32,24 @@ class OrderpageBloc extends Bloc<OrderpageEvent, OrderpageState> {
         yield OrderFailure(error: error.toString());
       }
     }
+
+    /* -------------------------------------------------------------------------- */
+    /*                           // ! ORDER PAGE IN CART                          */
+    /* -------------------------------------------------------------------------- */
+    // if (event is OrderBtnCart) {
+    //     yield OrderLoading();
+
+    //     try {
+    //       List<Order> order = await orderRespo.orderData(
+    //           address: event.address,
+    //           product: event.product,
+    //           quantity: event.quantity);
+
+    //       yield OrderSucccess();
+    //     } catch (error) {
+    //       yield OrderFailure(error: error.toString());
+    //     }
+    //   }
+    // }
   }
 }

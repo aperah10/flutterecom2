@@ -47,9 +47,9 @@ class _MyDrawerListState extends State<MyDrawerList> {
             createPage: () => ProductGridScr()),
 
         CusDrawerList(
-            title: 'MyOrder',
+            title: 'Cart Screen',
             icon: Icons.photo,
-            createPage: () => MyOrderPage()),
+            createPage: () => CartScr()),
         CusDrawerList(
             title: 'Order with cP',
             icon: Icons.photo,

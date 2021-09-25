@@ -70,7 +70,7 @@ class _OrderStrpState extends State<OrderStrp> {
                       address: adrId,
                       product: widget.prodNumber.id,
                       quantity: ordQuan));
-                print('this is addressid ${adrId}');
+                // print('this is addressid ${adrId}');
               } else {
                 setState(() => curStep += 1);
               }

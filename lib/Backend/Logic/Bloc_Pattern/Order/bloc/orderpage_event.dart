@@ -22,3 +22,21 @@ class OrderBtnPressed extends OrderpageEvent {
   String toString() =>
       'OrderBtnPressed { username: $product, password: $address }';
 }
+
+/* -------------------------------------------------------------------------- */
+/*                       // ! ORDER BUTTON FOR CART PAGE                      */
+/* -------------------------------------------------------------------------- */
+class OrderBtnCart extends OrderpageEvent {
+  final String address;
+  final List product;
+  int? quantity;
+
+  OrderBtnCart({required this.address, required this.product, this.quantity});
+
+  @override
+  List<Object> get props => [product, address];
+
+  @override
+  String toString() =>
+      'OrderBtnPressed { username: $product, password: $address }';
+}

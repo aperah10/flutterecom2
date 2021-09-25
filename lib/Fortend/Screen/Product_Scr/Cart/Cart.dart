@@ -6,6 +6,7 @@ import 'package:secd_ecom/Fortend/CusField/Buttons_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Image_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Iocns_C.dart';
 import 'package:secd_ecom/Fortend/CusField/Text_C.dart';
+import 'package:secd_ecom/Fortend/Screen/AMyPage/OrderWidget/Order1.dart';
 import 'package:secd_ecom/Fortend/Widget/Appbar/CusAppbar.dart';
 import 'package:secd_ecom/Fortend/Widget/Border/round_border.dart';
 
@@ -44,7 +45,7 @@ class _CartScrState extends State<CartScr> {
         return Center(child: Text(' this is eror ${state.message}'));
       }
       if (state is CartLoadedState) {
-        return CartScrOne(cartData: state.cartData);
+        return CartScrOne(cartData: state.cartData, adrData: state.addressData);
       }
       return Scaffold(
         body: Center(
@@ -61,9 +62,11 @@ class _CartScrState extends State<CartScr> {
 
 class CartScrOne extends StatelessWidget {
   dynamic cartData;
+  dynamic adrData;
   CartScrOne({
     Key? key,
     this.cartData,
+    this.adrData,
   }) : super(key: key);
 
   @override
@@ -88,7 +91,7 @@ class CartScrOne extends StatelessWidget {
                         }),
                   ),
                   // ! CHECKOUT BTN
-                  CartCheckBtn()
+                  CartCheckBtn(adrData: adrData, cartData: cartData)
                 ]))
               : Center(child: Text('No product in Cart'))),
     );
@@ -99,51 +102,60 @@ class CartScrOne extends StatelessWidget {
 /*                            // ! CHECKOUT SCREEN                            */
 /* -------------------------------------------------------------------------- */
 class CartCheckBtn extends StatelessWidget {
-  const CartCheckBtn({Key? key}) : super(key: key);
+  dynamic adrData;
+  dynamic cartData;
+  CartCheckBtn({Key? key, this.adrData, this.cartData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Material(
         color: Colors.black12,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              // ! TOATAL PRICE DATA
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: <Widget>[
-                    TxtTitle(
-                      "Checkout Price:",
-                    ),
-                    Spacer(),
-                    Text(
-                      "Rs. 5000",
-                    ),
-                  ],
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <
+            Widget>[
+          // ! TOATAL PRICE DATA
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                TxtTitle(
+                  "Checkout Price:",
                 ),
-              ),
-              //  ! 2
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: <Widget>[
-                    TxtTitle(
-                      "Checkout Price:",
-                    ),
-                    Spacer(),
-                    Text(
-                      "Rs. 5000",
-                    ),
-                  ],
+                Spacer(),
+                Text(
+                  "Rs. 5000",
                 ),
-              ),
+              ],
+            ),
+          ),
+          //  ! 2
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                TxtTitle(
+                  "Checkout Price:",
+                ),
+                Spacer(),
+                Text(
+                  "Rs. 5000",
+                ),
+              ],
+            ),
+          ),
 
-              // ! CHECKOUT BTN
-              SingleBtn(
-                btnName: "Continue",
-              )
-            ]));
+          // ! CHECKOUT BTN
+          SingleBtn(
+            btnName: "Continue",
+            submitMethod: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          // ! add PRODUCT ITEM DEIALS
+                          OrderWithCart(adrData: adrData, cartList: cartData)));
+            },
+          )
+        ]));
   }
 }
 
